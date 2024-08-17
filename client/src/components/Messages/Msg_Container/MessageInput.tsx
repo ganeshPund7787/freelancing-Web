@@ -16,7 +16,7 @@ const MessageInput = () => {
   return (
     <>
       <div className="flex gap-3 items-center cursor-pointer">
-        <form onSubmit={handlSubmit} className="w-[90%] ml-2">
+        <form onSubmit={handlSubmit} className="w-full">
           <div className="w-full relative">
             <input
               type="text"
@@ -25,7 +25,7 @@ const MessageInput = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="send a message"
-              className="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
+              className="border text-sm rounded-lg block w-full p-2 md:p-3 bg-gray-700 border-gray-600 text-white"
             />
             <button
               type="submit"

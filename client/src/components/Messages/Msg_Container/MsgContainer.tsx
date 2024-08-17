@@ -14,7 +14,7 @@ const MsgContainer = () => {
   }, []);
 
   return (
-    <div className="md:min-w-[450px]  flex  flex-col justify-between">
+    <div className="md:min-w-[450px] flex flex-col h-[40rem] sm:h-full min-w-[20rem]">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
@@ -32,8 +32,8 @@ const MsgContainer = () => {
               {selectedConversation.fullName}
             </span>
           </div>
-            <Messages />
-            
+          <Messages />
+
           <MessageInput />
         </>
       )}

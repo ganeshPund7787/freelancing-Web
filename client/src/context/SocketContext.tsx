@@ -1,4 +1,5 @@
 import { useAppSelectore } from "@/App/store";
+import { BACKEND_API_URL } from "@/main";
 import React, {
   createContext,
   useContext,
@@ -39,7 +40,8 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
 
   useEffect(() => {
     if (CurrentCivilUser || Client) {
-      const socket = io("https://freelancing-web.onrender.com", {
+      const socket = io(BACKEND_API_URL, {
+        // https://freelancing-web.onrender.com
         query: {
           userId: CurrentCivilUser?._id || Client?._id,
         },

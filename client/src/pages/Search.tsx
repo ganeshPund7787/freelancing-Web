@@ -6,11 +6,7 @@ const Search = () => {
           <h1 className="text-lg font-semibold border-b border-slate-300 pb-5">
             Filter By:{" "}
           </h1>
-          {/* <StarRatingFilter
-            selectedStars={selectedStars}
-            onChange={handleStarsChange}
-          />
-          <HotelTypesFilter
+          {/* <HotelTypesFilter
             selectedHotelTypes={selectedHotelTypes}
             onChange={handleHotelTypeChange}
           />
@@ -27,11 +23,8 @@ const Search = () => {
 
       <div className="flex flex-col h-fit gap-4">
         <div className="flex justify-between items-center">
-          <span className="text-xl font-bold">
-          </span>
-          <select
-            className="p-2 border rounded-md"
-          >
+          <span className="text-xl font-bold"></span>
+          <select className="p-2 border rounded-md">
             <option value="">Sort By</option>
             <option value="starRating">Star Rating</option>
             <option value="pricePerNightAsc">
@@ -46,7 +39,6 @@ const Search = () => {
           <SearchResultsCard key={hotel._id} hotel={hotel} />
         ))} */}
         <hr />
-       
       </div>
     </div>
   );
