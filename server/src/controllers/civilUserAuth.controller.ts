@@ -159,3 +159,72 @@ export const getAllCivilUsers = async (
     next(error);
   }
 };
+
+export const googleLoginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
+    let isUserExist = await CivilUser.findOne({ email });
+
+    if (!isUserExist) {
+      next();
+      return;
+    }
+
+    const token = jwt.sign(
+      { id: isUserExist._id },
+      process.env.JWT_SECREATE_KEY_BACKEND as string
+    );
+
+    const user = isUserExist.toObject();
+    const { password: _, ...rest } = user;
+
+    res
+      .cookie("cookie", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json(rest);
+  } catch (error: any) {
+    next(error.message);
+  }
+};
+
+export const googleLoginCllient = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { email } = req.body;
+    let isUserExist = await Client.findOne({ email });
+
+    if (!isUserExist) {
+      return next(errorHandler(400, "email is not exist"));
+    }
+
+    const token = jwt.sign(
+      { id: isUserExist._id },
+      process.env.JWT_SECREATE_KEY_BACKEND as string
+    );
+
+    const user = isUserExist.toObject();
+    const { password: _, ...rest } = user;
+
+    res
+      .cookie("cookie", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json(rest);
+  } catch (error: any) {
+    next(error.message);
+  }
+};

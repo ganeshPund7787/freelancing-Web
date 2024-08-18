@@ -30,7 +30,7 @@ export const useCivilApi = () => {
     });
 
     const data = await res.json();
-    console.log(data);
+    
     setisLoading(false);
     if (!data.success) {
       toast.error(data.message);
@@ -54,7 +54,7 @@ export const useCivilApi = () => {
     });
 
     const data = await res.json();
-    console.log("User Login", data);
+    
     
     if (data.success === false) {
       toast.warning(data.message);

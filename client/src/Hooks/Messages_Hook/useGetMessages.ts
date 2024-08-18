@@ -25,7 +25,7 @@ const useGetMessages = () => {
           }
         );
         const data = await res.json();
-        console.log("Messages: ", data);
+
         if (data.success === false) {
           setLoading(false);
           throw new Error(data.message);

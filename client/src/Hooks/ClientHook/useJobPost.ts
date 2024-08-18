@@ -17,7 +17,6 @@ const useJobPost = () => {
         body: JSON.stringify(data),
       });
       const respoceBody = await res.json();
-      console.log(respoceBody);
       if (respoceBody.success === false) {
         toast.error("error on create job");
         return;
@@ -39,7 +38,6 @@ const useJobPost = () => {
         credentials: "include",
       });
       const data = await res.json();
-      console.log(data);
       return data;
     } catch (error: any) {
       console.log(error.message);

@@ -13,7 +13,7 @@ const Messages = () => {
       </div>
 
       <div
-        className={`border border-slate-600 ${
+        className={` ${
           selectedConversation ? "block" : "hidden md:block"
         }`}
       >

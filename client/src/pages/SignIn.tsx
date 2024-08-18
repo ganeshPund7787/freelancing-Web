@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { Form, FormDescription } from "@/components/ui/form";
@@ -8,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useCivilApi } from "@/API/useCivilUserApi";
 import { useAppSelectore } from "@/App/store";
 import FormInput from "@/components/FormInput";
+import OAuth from "@/components/OAuth";
 
 const formSchema = z.object({
   email: z.string().trim().min(5, "required"),
@@ -79,7 +79,7 @@ const SignIn = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="bg-cyan-400 disabled:cursor-not-allowed mt-7 shadow-lg hover:text-white text-black w-full md:w-60 rounded-[1em] border"
+              className="bg-cyan-400 disabled:cursor-not-allowed mt-7 shadow-lg hover:text-white text-black w-full  rounded-[1em] border"
             >
               {loading ? (
                 <span className="loading text-cyan-600 loading-spinner"></span>
@@ -87,6 +87,8 @@ const SignIn = () => {
                 "SIGN IN"
               )}
             </Button>
+            <hr className="text-slate-600" />
+            <OAuth />
           </div>
         </div>
       </form>
