@@ -167,6 +167,7 @@ export const googleLoginUser = async (
 ) => {
   try {
     const { email } = req.body;
+
     let isUserExist = await CivilUser.findOne({ email });
 
     if (!isUserExist) {
@@ -202,8 +203,8 @@ export const googleLoginCllient = async (
 ) => {
   try {
     const { email } = req.body;
-    let isUserExist = await Client.findOne({ email });
 
+    let isUserExist = await Client.findOne({ email });
     if (!isUserExist) {
       return next(errorHandler(400, "email is not exist"));
     }

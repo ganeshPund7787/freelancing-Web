@@ -1,11 +1,17 @@
+import useSignInWithGoogle from "@/API/useSignInWithGoogle";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const OAuth = () => {
+  const { SignIn } = useSignInWithGoogle();
   const handleClick = async () => {
     const Provider = new GoogleAuthProvider();
     const auth = getAuth();
     const result = await signInWithPopup(auth, Provider);
-    console.log(result.user.email);
+
+    result.user.email
+      ? SignIn(result.user.email)
+      : toast.error("Email Not Found");
   };
   return (
     <button
