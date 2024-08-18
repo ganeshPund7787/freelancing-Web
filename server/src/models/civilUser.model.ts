@@ -107,6 +107,7 @@ const civilUserSchema = new mongoose.Schema<CivilUserType>({
   fullName: {
     type: String,
     required: true,
+    unique: true,
   },
 
   dateOfBirth: {

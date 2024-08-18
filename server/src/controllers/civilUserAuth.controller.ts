@@ -11,11 +11,18 @@ export const Register = async (
   next: NextFunction
 ) => {
   try {
-    const isUserExist = await CivilUser.findOne({ email: req.body.email });
-    const isClientUser = await Client.findOne({ email: req.body.email });
+    const { email, fullName } = req.body;
+
+    const isUserExist = await CivilUser.findOne({
+      $or: [{ email }, { fullName }],
+    });
+
+    const isClientUser = await Client.findOne({
+      $or: [{ email }, { fullName }],
+    });
 
     if (isUserExist || isClientUser) {
-      return next(errorHandler(400, "email already exist"));
+      return next(errorHandler(400, "User already exists"));
     }
 
     const date = new Date(req.body.dateOfBirth).toISOString().split("T")[0];

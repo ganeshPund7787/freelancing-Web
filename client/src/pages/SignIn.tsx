@@ -62,17 +62,10 @@ const SignIn = () => {
 
             <div className="">
               <FormDescription className="text-sm">
-                Looking to join us? Register now!
-                <Link to={"/sign-up-user"} className="text-blue-500">
+                Looking to join us?
+                <Link to={"/select-role"} className="text-blue-500">
                   {" "}
-                  as a freelancer
-                </Link>
-              </FormDescription>
-              <FormDescription className="text-sm">
-                Looking to join us? Register now!
-                <Link to={"/sign-up-client"} className="text-blue-500">
-                  {" "}
-                  as a client
+                  Register now!
                 </Link>
               </FormDescription>
             </div>

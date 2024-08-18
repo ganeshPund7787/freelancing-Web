@@ -21,12 +21,13 @@ const useSignInWithGoogle = () => {
         credentials: "include",
         body: JSON.stringify({ email }),
       });
-        const data = await res.json();
-        
+      const data = await res.json();
+
       if (data.success === false) {
         toast.warning(data.message);
         dispatch(fetchFail());
         dispatch(fetchFailClient());
+        navigate("/select-role");
         return;
       }
 

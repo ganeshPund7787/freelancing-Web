@@ -10,11 +10,18 @@ export const CreateClient = async (
   next: NextFunction
 ) => {
   try {
-    const isUserxist = await Client.findOne({ email: req.body.email });
-    const isCivilUser = await CivilUser.findOne({ email: req.body.email });
-    console.log("Body: ", req.body);
-    if (isUserxist || isCivilUser) {
-      return next(errorHandler(400, "Email already exist"));
+    const { email, fullName } = req.body;
+
+    const isUserExist = await CivilUser.findOne({
+      $or: [{ email }, { fullName }],
+    });
+
+    const isClientUser = await Client.findOne({
+      $or: [{ email }, { fullName }],
+    });
+
+    if (isUserExist || isClientUser) {
+      return next(errorHandler(400, "User already exists"));
     }
 
     const hashedPassword = bcryptjs.hashSync(req.body.password, 10);

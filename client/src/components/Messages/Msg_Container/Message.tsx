@@ -1,6 +1,7 @@
 import { useAppSelectore } from "@/App/store";
 import { MessageType } from "@/types";
 import { extractTime } from "@/utils/extractTime";
+import { useState } from "react";
 
 type Props = {
   message: MessageType;
@@ -9,7 +10,11 @@ type Props = {
 const Message = ({ message }: Props) => {
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  const toggleReadMore = () => {
+    setIsExpanded(!isExpanded);
+  };
   let fromMe = message?.senderId === Client?._id;
   if (CurrentCivilUser?._id) {
     fromMe = message?.senderId === CurrentCivilUser?._id;
@@ -32,9 +37,21 @@ const Message = ({ message }: Props) => {
 
       {message?.message && (
         <div
-          className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+          className={`chat-bubble sm:w-[15rem] text-white ${bubbleBgColor} ${shakeClass} pb-2`}
         >
-          {message?.message}
+          <span>
+            {isExpanded
+              ? message?.message
+              : `${(message?.message as string).substring(0, 100)}`}
+          </span>
+          {(message?.message as string).length > 60 && (
+            <button
+              onClick={toggleReadMore}
+              className="text-white-500 text-xs  hover:text-red-700 font-medium ml-2"
+            >
+              {isExpanded ? "Read Less" : "Read More"}
+            </button>
+          )}
         </div>
       )}
 

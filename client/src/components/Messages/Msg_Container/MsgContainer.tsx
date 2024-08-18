@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { TiMessages } from "react-icons/ti";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 const MsgContainer = () => {
   const { selectedConversation } = useAppSelectore((c) => c.conversation);
@@ -19,18 +20,27 @@ const MsgContainer = () => {
         <NoChatSelected />
       ) : (
         <>
-          <div className="flex items-center gap-3 bg-slate-500 px-4 py-2 mb-2">
-            <img
-              src={
-                selectedConversation?.photoUrl ||
-                selectedConversation?.profilePictureUrl
-              }
-              className="h-10 w-10 rounded-full"
-              alt="IMG"
-            />
-            <span className="text-gray-900 font-bold">
-              {selectedConversation.fullName}
-            </span>
+          <div className="flex items-center justify-between gap-3 bg-slate-500 px-4 py-2 mb-2">
+            <div className="flex items-center justify-between sm:justify-normal gap-3 bg-slate-500 px-4 py-2 mb-2">
+              <img
+                src={
+                  selectedConversation?.photoUrl ||
+                  selectedConversation?.profilePictureUrl
+                }
+                className="h-10 w-10 rounded-full"
+                alt="IMG"
+              />
+              <span className="text-gray-900 font-bold">
+                {selectedConversation.fullName}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => dispatch(setSelectedConversation(null))}
+              className="md:hidden"
+            >
+              <FaArrowCircleRight size={35} />
+            </button>
           </div>
           <Messages />
 

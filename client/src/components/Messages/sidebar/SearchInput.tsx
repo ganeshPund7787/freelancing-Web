@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 
 const SearchInput = () => {
+  const [search, setSearch] = useState("");
+  console.log(search);
   return (
     <form className="flex items-center gap-2">
       <input
         type="text"
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="search.."
         className="input input-bordered rounded-full"
       />
