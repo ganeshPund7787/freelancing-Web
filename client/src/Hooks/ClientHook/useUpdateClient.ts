@@ -15,7 +15,9 @@ type Props = {
 const useUpdateClient = () => {
   const dispatch = useAppDispatch();
 
-  const updateClient = async ({ formData }: Props) => {
+  const updateClient = async ({
+    formData,
+  }: Props): Promise<Props | undefined> => {
     try {
       dispatch(fetchStartClient());
       const res = await fetch(`${BACKEND_API_URL}/api/client/update-client`, {

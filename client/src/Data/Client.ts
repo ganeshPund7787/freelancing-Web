@@ -18,7 +18,6 @@ export const skills = [
   "Building Codes Knowledge:",
   "Cost Estimation",
   "Structural Design",
-  "Time Management",
   "Problem-Solving",
 ] as const;
 

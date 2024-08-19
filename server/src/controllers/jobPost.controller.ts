@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { JobPost } from "../models/jobPost.model";
 import { errorHandler } from "../utils/error.Handler";
+import { JobPostType } from "../shared/Client.types";
 
 export const createJobPost = async (
   req: Request,
@@ -37,19 +38,6 @@ export const getClientPost = async (
   }
 };
 
-// export const getAllPosts = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const AllPost = await JobPost.find();
-//     res.status(200).json(AllPost);
-//   } catch (error: any) {
-//     next(error.message);
-//   }
-// };
-
 export const getAllPosts = async (
   req: Request,
   res: Response,
@@ -61,4 +49,50 @@ export const getAllPosts = async (
   } catch (error: any) {
     next(error.message);
   }
+};
+
+export const SearchJobPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const query = constructSearchQuery(req.query);
+    const result = await JobPost.find(query);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const constructSearchQuery = (queryParams: any) => {
+  let constructedQuery: any = {};
+
+  if (queryParams.experianceLevel) {
+    constructedQuery.$or = [
+      { experianceLevel: new RegExp(queryParams.experianceLevel, "i") },
+    ];
+  }
+
+  if (queryParams.HoursePerWeak) {
+    constructedQuery.HoursePerWeak = {
+      $gte: parseInt(queryParams.HoursePerWeak.toString()),
+    };
+  }
+
+  if (queryParams.skills) {
+    constructedQuery.skills = {
+      $all: Array.isArray(queryParams.skills)
+        ? queryParams.skills
+        : [queryParams.skills],
+    };
+  }
+
+  if (queryParams.salary) {
+    constructedQuery.salary = {
+      $lte: parseInt(queryParams.salary).toString(),
+    };
+  }
+
+  return constructedQuery;
 };

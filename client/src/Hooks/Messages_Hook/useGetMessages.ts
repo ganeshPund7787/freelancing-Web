@@ -11,7 +11,7 @@ const useGetMessages = () => {
   );
   const dispatch = useAppDispatch();
   useEffect(() => {
-    const getMessages = async () => {
+    const getMessages = async (): Promise<string[] | undefined> => {
       try {
         setLoading(true);
         const res = await fetch(
@@ -32,6 +32,7 @@ const useGetMessages = () => {
         }
         setLoading(false);
         dispatch(setMessages(data));
+        return;
       } catch (error: any) {
         setLoading(false);
         toast.error(error.message);

@@ -28,7 +28,9 @@ export type HeadUserType = {
 const useUpdateUser = () => {
   const disptch = useDispatch();
 
-  const update = async (formData: CivilUserType) => {
+  const update = async (
+    formData: CivilUserType
+  ): Promise<CivilUserType | undefined> => {
     try {
       disptch(fetchStart());
       const res = await fetch(`${BACKEND_API_URL}/api/user/update`, {

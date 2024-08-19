@@ -90,7 +90,7 @@ export type JobPostType = {
   description?: string;
   experianceLevel?: string;
   skills?: string[];
-  HoursePerWeak?: number;
+  HoursePerWeak?: number | undefined;
   location?: string;
   lastUpdated?: Date;
 };

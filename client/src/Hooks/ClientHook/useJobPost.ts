@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 const useJobPost = () => {
   const navigate = useNavigate();
 
-  const createPost = async (data: JobPostType) => {
+  const createPost = async (
+    data: JobPostType
+  ): Promise<JobPostType | undefined> => {
     try {
       const res = await fetch(`${BACKEND_API_URL}/api/job-post/create`, {
         method: "POST",
@@ -28,7 +30,7 @@ const useJobPost = () => {
     }
   };
 
-  const getJobPosts = async () => {
+  const getJobPosts = async (): Promise<JobPostType | undefined> => {
     try {
       const res = await fetch(`${BACKEND_API_URL}/api/job-post/getJobPost`, {
         method: "GET",

@@ -10,7 +10,9 @@ const useSendMessage = () => {
     (state) => state.conversation
   );
   const dispatch = useAppDispatch();
-  const sendMessage = async (message: string) => {
+  const sendMessage = async (
+    message: string
+  ): Promise<string | string[] | undefined> => {
     try {
       setLoading(true);
 
@@ -27,10 +29,11 @@ const useSendMessage = () => {
       );
 
       const data = await res.json();
-      
+
       if (data.success === false) throw new Error(data.message);
 
       dispatch(setMessages([...messages, data]));
+      return;
     } catch (error: any) {
       toast.error(error.message);
     } finally {

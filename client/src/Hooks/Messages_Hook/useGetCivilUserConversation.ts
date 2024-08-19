@@ -7,7 +7,7 @@ const useGetCivilUserConversation = () => {
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
-    const getConversation = async () => {
+    const getConversation = async (): Promise<string[] | undefined> => {
       setLoading(true);
       try {
         const res = await fetch(`${BACKEND_API_URL}/api/user/getAllCivil`, {

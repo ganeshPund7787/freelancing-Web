@@ -1,4 +1,3 @@
-
 import { NavLink } from "react-router-dom";
 import { Input } from "./ui/input";
 import { FaSearch } from "react-icons/fa";
@@ -17,7 +16,9 @@ const Header = () => {
     <>
       <nav className="flex sticky justify-between p-4">
         <div className="flex gap-5 items-center">
-          <h1 className="text-3xl text-cyan-400 font-semibold">civilHub</h1>
+          <NavLink to={"/"} className="text-3xl text-cyan-400 font-semibold">
+            civilHub
+          </NavLink>
           <div className="md:flex hidden mx-8 gap-8">
             <NavLink
               to="/"

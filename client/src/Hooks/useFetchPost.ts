@@ -1,12 +1,14 @@
 import { BACKEND_API_URL } from "@/main";
+import { PostType } from "@/types";
 import { toast } from "react-toastify";
 
 type PostFormData = {
   description: string;
   image?: string | undefined;
 };
+
 const useGetPost = () => {
-  const GetAllPost = async () => {
+  const GetAllPost = async (): Promise<PostType | undefined> => {
     try {
       const res = await fetch(`${BACKEND_API_URL}/api/post/get`, {
         method: "GET",
