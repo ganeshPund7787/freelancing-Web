@@ -41,6 +41,10 @@ const MobileNav = () => {
           <Link to={"/messages"} className="py-1">
             <SheetClose>Messages</SheetClose>
           </Link>
+
+          <Link to={"/media"} className="py-1">
+            <SheetClose>Media</SheetClose>
+          </Link>
         </div>
       </SheetContent>
     </Sheet>
