@@ -3,7 +3,7 @@ import PostCard from "@/components/PostCard";
 import useGetAllPost from "@/Hooks/Posts/useGetAllPost";
 import { useEffect } from "react";
 
-const Home = () => {
+const Media = () => {
   const { getPosts, posts, loading } = useGetAllPost();
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
@@ -35,4 +35,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Media;

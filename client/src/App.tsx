@@ -24,6 +24,8 @@ import Search from "./pages/Search";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/civilUser/SignUp";
 import SignUpClient from "./pages/client User/SignUpClient";
+import FindJobs from "./pages/FindJobs";
+import Media from "./pages/Media";
 
 const App: React.FC = () => {
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
@@ -53,6 +55,15 @@ const App: React.FC = () => {
             }
           />
           <Route
+            path="/find-jobs"
+            element={
+              <Layout showHero={false}>
+                <FindJobs />
+              </Layout>
+            }
+          />
+
+          <Route
             path="/messages"
             element={
               <Layout showHero={false}>
@@ -65,6 +76,14 @@ const App: React.FC = () => {
             element={
               <Layout showHero={false}>
                 <Search />
+              </Layout>
+            }
+          />
+          <Route
+            path="/media"
+            element={
+              <Layout showHero={false}>
+                <Media />
               </Layout>
             }
           />

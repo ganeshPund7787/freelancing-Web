@@ -7,6 +7,7 @@ import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import MobileNav from "./MobNav";
 import { MdOutlineFindInPage } from "react-icons/md";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
+import { MdPermMedia } from "react-icons/md";
 
 const Header = () => {
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
@@ -21,7 +22,7 @@ const Header = () => {
           </NavLink>
           <div className="md:flex hidden mx-8 gap-8">
             <NavLink
-              to="/"
+              to="/find-jobs"
               className={({ isActive }) =>
                 `p-1 rounded-[4px] border-none flex items-center gap-2 ${
                   isActive ? "text-cyan-500 underline" : " hover:underline"
@@ -40,6 +41,17 @@ const Header = () => {
               }
             >
               Messages <BiSolidMessageSquareDetail />
+            </NavLink>
+
+            <NavLink
+              to="/media"
+              className={({ isActive }) =>
+                `p-1 rounded-[4px] border-none flex items-center gap-2 ${
+                  isActive ? "text-cyan-500 underline" : " hover:underline"
+                }`
+              }
+            >
+              Media <MdPermMedia />
             </NavLink>
           </div>
         </div>

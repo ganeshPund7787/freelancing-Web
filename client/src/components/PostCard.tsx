@@ -6,15 +6,21 @@ import EditPost from "./EditPost";
 import { MdDelete } from "react-icons/md";
 import useGetPost from "@/Hooks/useFetchPost";
 import { toast } from "react-toastify";
+import { useAppSelectore } from "@/App/store";
 
 type Props = {
   post: PostType;
-  user: ClientType | CivilUserType;
+  user: ClientType | CivilUserType | any;
 };
 
 const PostCard = ({ post, user }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { deletePost } = useGetPost();
+  const { Client } = useAppSelectore((state) => state.client);
+  const { CurrentCivilUser } = useAppSelectore((state) => state.user);
+
+  const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
+
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
@@ -34,6 +40,8 @@ const PostCard = ({ post, user }: Props) => {
     deletePost(post._id);
   };
 
+  if (!user) return <div>No Post Availabel</div>;
+
   return (
     <div className="flex flex-col md:mx-52 border border-slate-500">
       <div className="w-full flex justify-between items-center">
@@ -49,10 +57,18 @@ const PostCard = ({ post, user }: Props) => {
           <h1>{user.fullName}</h1>
         </div>
         <div className="flex gap-5 mx-2 items-center">
-          <Button onClick={OnClickDeletePost} type="button" title="Delete Post">
-            <MdDelete size={20} />
-          </Button>
-          <EditPost post={post} />
+          {defaultUser?._id === post.userId && (
+            <>
+              <Button
+                onClick={OnClickDeletePost}
+                type="button"
+                title="Delete Post"
+              >
+                <MdDelete size={20} />
+              </Button>
+              <EditPost post={post} />
+            </>
+          )}
         </div>
       </div>
 
@@ -76,7 +92,7 @@ const PostCard = ({ post, user }: Props) => {
           <img
             src={post.image}
             alt=""
-            className="h-72 w-full object-cover object-center"
+            className="h-96 w-full object-cover object-center"
           />
         )}
       </div>

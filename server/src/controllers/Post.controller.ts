@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { Post } from "../models/post.model";
 import { errorHandler } from "../utils/error.Handler";
+import { CivilUserType, PostType } from "../shared/types";
+import { Client } from "../models/Client.model";
+import { CivilUser } from "../models/civilUser.model";
 
 export const createPost = async (
   req: Request,
@@ -84,4 +87,54 @@ export const deletePost = async (
   }
 };
 
+// export const GetAllPosts = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const result: PostType[] = await Post.find().sort({ createdAt: -1 });
+//     console.log(`first`);
+//     const users: ClientTypes | CivilUserType | any = [];
 
+//     for (const post of result) {
+//       let user = await Client.findById(post.userId).select("-password");
+//       if (user) {
+//         users.push(user);
+//         return;
+//       } else {
+//         user = await CivilUser.findById(post.userId).select("-password");
+//         users.push(user);
+//       }
+//     }
+
+//     res.status(200).json({ result, users });
+
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+export const GetAllPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const result: PostType[] | any = await Post.find().sort({ createdAt: -1 });
+
+    const postsWithUsers = await Promise.all(
+      result.map(async (post: any) => {
+        let user = await Client.findById(post.userId).select("-password");
+        if (!user) {
+          user = await CivilUser.findById(post.userId).select("-password");
+        }
+        return { ...post.toObject(), user }; // Combine post data with the user data
+      })
+    );
+
+    res.status(200).json(postsWithUsers);
+  } catch (error) {
+    next(error);
+  }
+};

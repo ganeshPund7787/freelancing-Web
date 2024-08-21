@@ -80,6 +80,7 @@ export type PostType = {
     userId: string;
     comment: string;
   }[];
+  user?: ClientType | CivilUserType;
 };
 
 export type JobPostType = {
@@ -93,6 +94,7 @@ export type JobPostType = {
   HoursePerWeak?: number | undefined;
   location?: string;
   lastUpdated?: Date;
+  user?: ClientType | CivilUserType;
 };
 
 export type MessageType = {

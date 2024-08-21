@@ -28,7 +28,9 @@ const Profile = () => {
   const GetPost = async () => {
     if (CurrentCivilUser) {
       const res = await GetAllPost();
-      setPosts(res);
+      if (res) {
+        setPosts(res);
+      }
     }
   };
 

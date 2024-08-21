@@ -24,8 +24,8 @@ const ClientProfile = () => {
 
   const GetPost = async () => {
     if (Client) {
-      const res = await GetAllPost();
-      setPosts(res);
+      const res: PostType | undefined = await GetAllPost();
+      setPosts(res as PostType);
     }
   };
 
