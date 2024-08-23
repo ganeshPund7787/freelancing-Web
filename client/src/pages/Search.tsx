@@ -29,9 +29,10 @@ const Search = () => {
         : skill.filter((preFacility) => preFacility !== facility)
     );
   };
+
   useEffect(() => {
     SearchFilter(search);
-  }, [search]);
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row w-full justify-between gap-5">
@@ -58,7 +59,7 @@ const Search = () => {
           searchJobs?.map((job: any) => (
             <JobPostCard key={job._id} post={job} />
           ))}
-        {searchJobs && searchJobs.length === 0 && <ClientPost />}
+        {searchJobs?.length === 0 ? <ClientPost /> : null}
       </div>
     </div>
   );

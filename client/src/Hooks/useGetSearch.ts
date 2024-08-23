@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const useGetSearch = () => {
   const [searchJobs, setSearchJobs] = useState<string[] | undefined>([]);
-  
+
   const SearchFilter = async (
     Search: JobPostType
   ): Promise<JobPostType | undefined> => {
@@ -27,7 +27,6 @@ const useGetSearch = () => {
         }
       );
       const data = await res.json();
-      console.log(data);
       if (data.success === false) throw new Error(data.message);
       setSearchJobs(data);
       return;

@@ -58,8 +58,25 @@ export const SearchJobPosts = async (
 ) => {
   try {
     const query = constructSearchQuery(req.query);
+
     const result = await JobPost.find(query);
     res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const SearchHeadingPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const heading = req.query.heading as string; 
+    const result = await JobPost.find({
+      heading: { $regex: heading, $options: "i" },
+    });
+    res.json(result);
   } catch (error) {
     next(error);
   }

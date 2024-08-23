@@ -7,6 +7,8 @@ import { MdDelete } from "react-icons/md";
 import useGetPost from "@/Hooks/useFetchPost";
 import { toast } from "react-toastify";
 import { useAppSelectore } from "@/App/store";
+import CommentInput from "./Posts/CommentInput";
+import { FaRegCommentDots } from "react-icons/fa";
 
 type Props = {
   post: PostType;
@@ -18,6 +20,7 @@ const PostCard = ({ post, user }: Props) => {
   const { deletePost } = useGetPost();
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
+  const [IsCommentVisible, setIsCommentVisible] = useState<boolean>(false);
 
   const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
 
@@ -40,8 +43,11 @@ const PostCard = ({ post, user }: Props) => {
     deletePost(post._id);
   };
 
-  if (!user) return <div>No Post Availabel</div>;
+  const toggleCommentVisisble = () => {
+    setIsCommentVisible((pre) => !pre);
+  };
 
+  if (!user) return <div>No Post Availabel</div>;
   return (
     <div className="flex flex-col md:mx-52 border border-slate-500">
       <div className="w-full flex justify-between items-center">
@@ -92,18 +98,26 @@ const PostCard = ({ post, user }: Props) => {
           <img
             src={post.image}
             alt=""
-            className="h-96 w-full object-cover object-center"
+            className="h-[90vh] w-full object-cover object-center"
           />
         )}
       </div>
-      <div className="mt-5 mb-1">
-        <Button>
-          <BiLike size={25} />
+      <div className="flex justify-between mt-5 mb-1">
+        <Button className="flex gap-3">
+          <BiLike size={25} /> like
+        </Button>
+        <Button
+          type="submit"
+          onClick={toggleCommentVisisble}
+          className="flex gap-3"
+        >
+          <FaRegCommentDots size={25} /> Comments
         </Button>
       </div>
       {post.likes?.length !== 0 && (
         <span className="my-1 mx-4">{post.likes?.length} likes</span>
       )}
+      <div className="">{IsCommentVisible && <CommentInput />}</div>
     </div>
   );
 };

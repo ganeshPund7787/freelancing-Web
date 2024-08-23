@@ -4,6 +4,7 @@ import {
   createJobPost,
   getAllPosts,
   getClientPost,
+  SearchHeadingPost,
   SearchJobPosts,
 } from "../controllers/jobPost.controller";
 
@@ -13,5 +14,6 @@ routes.post("/create", isAuthenticated, createJobPost);
 routes.get("/getJobPost", isAuthenticated, getClientPost);
 routes.get("/getAllJobPost", isAuthenticated, getAllPosts);
 routes.get("/search", isAuthenticated, SearchJobPosts);
+routes.get("/search-heading", isAuthenticated, SearchHeadingPost);
 
 export default routes;

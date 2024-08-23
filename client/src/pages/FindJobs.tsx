@@ -1,5 +1,5 @@
 import ClientPost from "@/components/ClientPost";
-import JobSearchInput from "@/components/JobSearchInput";
+import JobSearchInput from "@/components/Posts/JobSearchInput";
 
 const FindJobs = () => {
   return (
