@@ -93,34 +93,33 @@ const JobPostDetails = ({ post }: any) => {
             <h1 className="sm:text-2xl mt-5">About The Client</h1>
             <div className="flex flex-col gap-5">
               <span className="text-xs text-slate-300">
-                Member since : {ClientCreate.toLocaleDateString()}
+                Member since : {ClientCreate?.toLocaleDateString()}
               </span>
               <span className="flex gap-2 items-center">
                 <FaLocationDot />
-                {ClientCountry.toUpperCase()}{" "}
+                {ClientCountry?.toUpperCase()}
               </span>
               {post?.user?.company && (
                 <span>{post?.user?.company} company</span>
               )}
-              <div className="">
-                <Button
-                  type="submit"
-                  className="border border-slate-500 bg-cyan-400 text-black"
-                >
-                  View Profile
-                </Button>
-                <Button
-                  type="submit"
-                  className="border border-slate-500 bg-cyan-400 text-black"
-                >
-                  Message 
-                </Button>
-              </div>
             </div>
           </SheetDescription>
           <SheetFooter>
-            <SheetClose asChild>
-              <Button type="submit">Save changes</Button>
+            <SheetClose className="sm:mx-10" asChild>
+              <Button
+                type="submit"
+                className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
+              >
+                View Client Profile
+              </Button>
+            </SheetClose>
+            <SheetClose className="sm:mx-10" asChild>
+              <Button
+                type="submit"
+                className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
+              >
+                Send Email
+              </Button>
             </SheetClose>
           </SheetFooter>
         </SheetContent>
