@@ -129,8 +129,8 @@ export const GetAllPosts = async (
         if (!user) {
           user = await CivilUser.findById(post.userId).select("-password");
         }
-        return { ...post.toObject(), user }; // Combine post data with the user data
-      })
+        return { ...post.toObject(), user }; 
+      })  
     );
 
     res.status(200).json(postsWithUsers);

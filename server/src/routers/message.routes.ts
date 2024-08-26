@@ -1,9 +1,14 @@
 import express from "express";
-import { getMessages, sendMessage } from "../controllers/message.controller";
+import {
+  getMessages,
+  sendDynamicEmail,
+  sendMessage,
+} from "../controllers/message.controller";
 
-const route = express.Router();
+const router = express.Router();
 
-route.post("/send-msg/:id", sendMessage);
-route.get("/get-msg/:id", getMessages);
+router.post("/send-msg/:id", sendMessage);
+router.get("/get-msg/:id", getMessages);
+router.post("/send-email", sendDynamicEmail);
 
-export default route;
+export default router;

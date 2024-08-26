@@ -1,3 +1,5 @@
+import { CivilUserType } from "./types";
+
 export interface ClientType {
   _id: string;
   role?: string;
@@ -31,4 +33,5 @@ export interface JobPostType {
   HoursePerWeak: number;
   projectDuration: string;
   lastUpdated: Date;
+  user?: CivilUserType | ClientType;
 }

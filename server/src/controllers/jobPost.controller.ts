@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { JobPost } from "../models/jobPost.model";
 import { errorHandler } from "../utils/error.Handler";
 import { JobPostType } from "../shared/Client.types";
+import { Client } from "../models/Client.model";
+import { CivilUser } from "../models/civilUser.model";
 
 export const createJobPost = async (
   req: Request,
@@ -45,50 +47,28 @@ export const getAllPosts = async (
 ) => {
   try {
     const allPosts = await JobPost.find().sort({ createdAt: -1 });
-    res.status(200).json(allPosts);
+
+    const postWithUsers = await Promise.all(
+      allPosts.map(async (jobPost: any) => {
+        let user = await Client.findById(jobPost.clientId).select("-password");
+        return { ...jobPost.toObject(), user };
+      })
+    );
+    console.log(postWithUsers);
+    res.status(200).json(postWithUsers);
   } catch (error: any) {
     next(error.message);
   }
 };
 
-export const SearchJobPosts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const query = constructSearchQuery(req.query);
-
-    const result = await JobPost.find(query);
-    res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const SearchHeadingPost = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const heading = req.query.heading as string; 
-    const result = await JobPost.find({
-      heading: { $regex: heading, $options: "i" },
-    });
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-};
-
 const constructSearchQuery = (queryParams: any) => {
-  let constructedQuery: any = {};
+  const constructedQuery: any = {};
 
   if (queryParams.experianceLevel) {
-    constructedQuery.$or = [
-      { experianceLevel: new RegExp(queryParams.experianceLevel, "i") },
-    ];
+    constructedQuery.experianceLevel = new RegExp(
+      queryParams.experianceLevel,
+      "i"
+    );
   }
 
   if (queryParams.HoursePerWeak) {
@@ -107,9 +87,88 @@ const constructSearchQuery = (queryParams: any) => {
 
   if (queryParams.salary) {
     constructedQuery.salary = {
-      $lte: parseInt(queryParams.salary).toString(),
+      $lte: parseInt(queryParams.salary.toString()),
     };
   }
 
   return constructedQuery;
 };
+
+export const SearchJobPosts = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const query = constructSearchQuery(req.query);
+
+    const result = await JobPost.find(query);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// export const SearchJobPosts = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//     const query = constructSearchQuery(req.query);
+
+//     const result = await JobPost.find(query);
+//     res.status(200).json(result);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+export const SearchHeadingPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const heading = req.query.heading as string;
+    const result = await JobPost.find({
+      heading: { $regex: heading, $options: "i" },
+    });
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// const constructSearchQuery = (queryParams: any) => {
+//   let constructedQuery: any = {};
+
+//   if (queryParams.experianceLevel) {
+//     constructedQuery.experianceLevel = new RegExp(
+//       queryParams.experianceLevel,
+//       "i"
+//     );
+//   }
+
+//   if (queryParams.HoursePerWeak) {
+//     constructedQuery.HoursePerWeak = {
+//       $gte: parseInt(queryParams.HoursePerWeak.toString()),
+//     };
+//   }
+
+//   if (queryParams.skills) {
+//     constructedQuery.skills = {
+//       $all: Array.isArray(queryParams.skills)
+//         ? queryParams.skills
+//         : [queryParams.skills],
+//     };
+//   }
+
+//   if (queryParams.salary) {
+//     constructedQuery.salary = {
+//       $lte: parseInt(queryParams.salary.toString()),
+//     };
+//   }
+
+//   return constructedQuery;
+// };

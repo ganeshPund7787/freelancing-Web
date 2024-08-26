@@ -1,18 +1,20 @@
-import { useAppDispatch } from "@/App/store";
 import useSearchHeading from "@/Hooks/Posts/useSearchHeading";
 import { FormEvent, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const JobSearchInput = () => {
   const [headingInput, setHeadingInput] = useState<string>("");
-  const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+
   const { search } = useSearchHeading();
 
   const handleSubmit = (e: Event | FormEvent) => {
     e.preventDefault();
+    if (!headingInput.trim()) return;
     search(headingInput);
+    setHeadingInput("");
+    navigate("/search");
   };
 
   return (

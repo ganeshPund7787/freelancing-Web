@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui/button";
 import {
   Sheet,
@@ -11,15 +11,12 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { FaLocationDot } from "react-icons/fa6";
-import { useAppSelectore } from "@/App/store";
-// import Contact from "./ContactClient";
-// import { BACKEND_API_URL } from "@/main";
 
 const JobPostDetails = ({ post }: any) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
-  // const [client, setClient] = useState({});
-  const { CurrentCivilUser } = useAppSelectore((s) => s.user);
-
+  const ClientCreate: Date = new Date(post?.user?.createdAt);
+  const ClientCountry: string = post?.user?.address?.country;
+  console.log("JobPostDetails: ", post);
   const toggleDescription = () => {
     setShowFullDescription((prev) => !prev);
   };
@@ -31,21 +28,6 @@ const JobPostDetails = ({ post }: any) => {
       : description;
   };
 
-  useEffect(() => {
-    //   // const getClientInfo = async () => {
-    //   //   try {
-    //   //     const res = await fetch(
-    //   //       `${BACKEND_API_URL}/api/client/${post?.clientId}`
-    //   //     );
-    //   //     const data = await res.json();
-    //   //     setClient(data);
-    //   //     return data;
-    //   //   } catch (error) {
-    //   //     console.log(`Error while `, error);
-    //   //   }
-    //   // };
-    //   // getClientInfo();
-  }, []);
   return (
     <div className="grid grid-cols-2 gap-2">
       <Sheet>
@@ -103,12 +85,38 @@ const JobPostDetails = ({ post }: any) => {
           </SheetDescription>
 
           <SheetDescription className="my-2">
-            <span className="flex gap-2 ">
+            <span className="flex gap-2 items-center">
               <FaLocationDot /> {post?.location}
             </span>
           </SheetDescription>
           <SheetDescription>
-            {CurrentCivilUser ? <></> : <div className=""></div>}
+            <h1 className="sm:text-2xl mt-5">About The Client</h1>
+            <div className="flex flex-col gap-5">
+              <span className="text-xs text-slate-300">
+                Member since : {ClientCreate.toLocaleDateString()}
+              </span>
+              <span className="flex gap-2 items-center">
+                <FaLocationDot />
+                {ClientCountry.toUpperCase()}{" "}
+              </span>
+              {post?.user?.company && (
+                <span>{post?.user?.company} company</span>
+              )}
+              <div className="">
+                <Button
+                  type="submit"
+                  className="border border-slate-500 bg-cyan-400 text-black"
+                >
+                  View Profile
+                </Button>
+                <Button
+                  type="submit"
+                  className="border border-slate-500 bg-cyan-400 text-black"
+                >
+                  Message 
+                </Button>
+              </div>
+            </div>
           </SheetDescription>
           <SheetFooter>
             <SheetClose asChild>

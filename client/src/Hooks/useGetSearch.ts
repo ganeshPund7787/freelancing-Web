@@ -3,21 +3,27 @@ import { JobPostType } from "@/types";
 import { useState } from "react";
 
 const useGetSearch = () => {
-  const [searchJobs, setSearchJobs] = useState<string[] | undefined>([]);
+  const [searchJobs, setSearchJobs] = useState<JobPostType[] | undefined>([]);
 
-  const SearchFilter = async (
-    Search: JobPostType
-  ): Promise<JobPostType | undefined> => {
+  const SearchFilter = async (search: JobPostType): Promise<void> => {
     try {
       const queryParams = new URLSearchParams();
-      queryParams.append("experianceLevel", Search.experianceLevel || "");
-      queryParams.append(
-        "HoursePerWeak",
-        Search.HoursePerWeak?.toString() || ""
-      );
-      queryParams.append("salary", Search.salary || "");
 
-      Search.skills?.forEach((skill) => queryParams.append("skills", skill));
+      if (search.experianceLevel) {
+        queryParams.append("experianceLevel", search.experianceLevel);
+      }
+
+      if (search.HoursePerWeak !== undefined) {
+        queryParams.append("HoursePerWeak", search.HoursePerWeak.toString());
+      }
+
+      if (search.salary !== undefined) {
+        queryParams.append("salary", search.salary.toString());
+      }
+
+      if (search.skills && search.skills.length > 0) {
+        search.skills.forEach((skill) => queryParams.append("skills", skill));
+      }
 
       const res = await fetch(
         `${BACKEND_API_URL}/api/job-post/search?${queryParams.toString()}`,
@@ -26,12 +32,16 @@ const useGetSearch = () => {
           credentials: "include",
         }
       );
+
       const data = await res.json();
-      if (data.success === false) throw new Error(data.message);
+
+      if (!res.ok) {
+        throw new Error(data.message || "Search failed");
+      }
+
       setSearchJobs(data);
-      return;
     } catch (error) {
-      console.log(`Error while searching:`, error);
+      console.error("Error while searching:", error);
     }
   };
 

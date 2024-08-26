@@ -16,8 +16,11 @@ export const postSlice = createSlice({
     searchPost: (state, action: PayloadAction<JobPostType[] | []>) => {
       state.SeacrhedPost = action.payload;
     },
+    SearchPostEmty: (state) => {
+      state.SeacrhedPost = [];
+    },
   },
 });
 
-export const { searchPost } = postSlice.actions;
+export const { searchPost, SearchPostEmty } = postSlice.actions;
 export default postSlice.reducer;
