@@ -2,13 +2,21 @@ import useGetAllJobPost from "@/Hooks/Posts/useGetAllJobPost";
 import JobPostCard from "./ClientUser/JobPostCard";
 
 const ClientPost = () => {
-  const { posts } = useGetAllJobPost();
-  
+  const { posts, loading } = useGetAllJobPost();
+
   return (
     <div className="flex flex-col gap-7">
-      {posts?.map((post) => (
-        <JobPostCard post={post} />
-      ))}
+      {loading ? (
+        <div className="text-center">
+          <span className="loading text-cyan-600 loading-spinner"></span>
+        </div>
+      ) : (
+        <>
+          {posts?.map((post) => (
+            <JobPostCard post={post} />
+          ))}
+        </>
+      )}
     </div>
   );
 };

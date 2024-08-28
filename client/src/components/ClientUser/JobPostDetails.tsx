@@ -13,12 +13,14 @@ import {
 import { FaLocationDot } from "react-icons/fa6";
 import ContactToClient from "../Posts/ContactToClient";
 import { useAppSelectore } from "@/App/store";
+import { useNavigate } from "react-router-dom";
 
 const JobPostDetails = ({ post }: any) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const ClientCreate: Date = new Date(post?.user?.createdAt);
   const ClientCountry: string = post?.user?.address?.country;
   const { Client } = useAppSelectore((state) => state.client);
+  const Navigate = useNavigate();
   const toggleDescription = () => {
     setShowFullDescription((prev) => !prev);
   };
@@ -110,8 +112,8 @@ const JobPostDetails = ({ post }: any) => {
             {Client?._id !== post.clientId && (
               <>
                 <div className="flex flex-col sm:mt-0 mt-5">
-                  <div className="flex gap-3">
-                    <SheetClose className="sm:mx-10" asChild>
+                  <div className="flex">
+                    <SheetClose className="sm:mx-5" asChild>
                       <Button
                         type="submit"
                         className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
@@ -119,11 +121,19 @@ const JobPostDetails = ({ post }: any) => {
                         View Client Profile
                       </Button>
                     </SheetClose>
-                    <SheetClose className="sm:mx-10" asChild>
+                    <SheetClose className="sm:mx-5" asChild>
                       <ContactToClient user={post?.user} />
                     </SheetClose>
+                    <SheetClose className="sm:mx-5" asChild>
+                      <Button
+                        onClick={() => Navigate("/messages")}
+                        type="button"
+                        className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
+                      >
+                        Send Message
+                      </Button>
+                    </SheetClose>
                   </div>
-                  <div className=""></div>
                 </div>
               </>
             )}

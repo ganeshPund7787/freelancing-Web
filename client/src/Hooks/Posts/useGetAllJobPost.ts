@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 const useGetAllJobPost = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchPosts = async (): Promise<PostType | undefined> => {
       try {
+        setLoading(true);
         const res = await fetch(
           `${BACKEND_API_URL}/api/job-post/getAllJobPost`,
           {
@@ -18,6 +20,7 @@ const useGetAllJobPost = () => {
           }
         );
         const data = await res.json();
+        setLoading(false);
         setPosts(data);
         return;
       } catch (error: any) {
@@ -26,7 +29,7 @@ const useGetAllJobPost = () => {
     };
     fetchPosts();
   }, []);
-  return { posts };
+  return { posts, loading };
 };
 
 export default useGetAllJobPost;
