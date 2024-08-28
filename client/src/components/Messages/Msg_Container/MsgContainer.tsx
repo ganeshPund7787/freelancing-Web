@@ -43,7 +43,6 @@ const MsgContainer = () => {
             </button>
           </div>
           <Messages />
-
           <MessageInput />
         </>
       )}

@@ -38,7 +38,7 @@ export type Props = {
 const ContactToClient = ({ user }: Props) => {
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
-  const { sendMessage } = useSendEmail();
+  const { sendMessage, loading } = useSendEmail();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -55,7 +55,6 @@ const ContactToClient = ({ user }: Props) => {
   const onSubmit = async (Data: any) => {
     await sendMessage(Data);
     setIsDialogOpen(false);
-    console.log(Data);
   };
 
   return (
@@ -135,9 +134,16 @@ const ContactToClient = ({ user }: Props) => {
               />
               <Button
                 type="submit"
-                className="bg-cyan-400 mt-7 disabled:cursor-not-allowed shadow-lg hover:text-white text-black w-full rounded-[1em] border"
+                disabled={loading}
+                className="bg-cyan-400 disabled:bg-cyan-300  mt-7 disabled:cursor-not-allowed shadow-lg hover:text-white text-black w-full rounded-[1em] border"
               >
-                Add
+                {loading ? (
+                  <div className="text-center">
+                    <span className="loading text-cyan-600 loading-spinner"></span>
+                  </div>
+                ) : (
+                  "Send Email "
+                )}
               </Button>
             </form>
           </FormProvider>
