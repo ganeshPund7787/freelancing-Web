@@ -75,7 +75,7 @@ export const getMessages = async (
 
 export const sendDynamicEmail = async (req: Request, res: Response) => {
   const { from, to, subject, text, html, user, pass } = req.body;
-  console.log(req.body);
+  
   try {
     const emailResponse = await sendMail(
       from,
