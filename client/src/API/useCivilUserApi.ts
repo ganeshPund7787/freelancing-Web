@@ -7,7 +7,7 @@ import {
 import { useAppDispatch } from "@/App/store";
 import { BACKEND_API_URL } from "@/main";
 import { UserFormDataSignUp } from "@/pages/civilUser/SignUp";
-import { UserFormData } from "@/pages/SignIn";
+import { UserFormData } from "@/pages/BothUserPages/SignIn";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -30,7 +30,7 @@ export const useCivilApi = () => {
     });
 
     const data = await res.json();
-    
+
     setisLoading(false);
     if (!data.success) {
       toast.error(data.message);
@@ -54,8 +54,7 @@ export const useCivilApi = () => {
     });
 
     const data = await res.json();
-    
-    
+
     if (data.success === false) {
       toast.warning(data.message);
       dispatch(fetchFail());

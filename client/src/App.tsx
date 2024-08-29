@@ -9,7 +9,7 @@ import {
   Routes,
 } from "react-router-dom";
 
-import SelectRoleFoeSignUp from "./pages/SelectRoleFoeSignUp";
+import SelectRoleFoeSignUp from "./pages/BothUserPages/SelectRoleFoeSignUp";
 import Layout from "./layout/Layout";
 import { useAppSelectore } from "./App/store";
 import ProtectRoute from "./components/ProtectRoute";
@@ -18,14 +18,13 @@ import { CivilProtectRoute } from "./components/CivilProtectRoute";
 import ClientProtectRoute from "./components/ClientProtectRoute";
 import ClientProfile from "./pages/client User/ClientProfile";
 import CreateJobPost from "./components/ClientUser/CreateJobPost";
-import Messages from "./pages/Messages";
-import Home from "./pages/Home";
-import Search from "./pages/Search";
-import SignIn from "./pages/SignIn";
+import Messages from "./pages/BothUserPages/Messages";
+import Home from "./pages/BothUserPages/Home";
+import Search from "./pages/BothUserPages/Search";
+import SignIn from "./pages/BothUserPages/SignIn";
 import SignUp from "./pages/civilUser/SignUp";
 import SignUpClient from "./pages/client User/SignUpClient";
-import FindJobs from "./pages/FindJobs";
-import Media from "./pages/Media";
+import Media from "./pages/BothUserPages/Media";
 
 const App: React.FC = () => {
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
@@ -54,14 +53,6 @@ const App: React.FC = () => {
               </Layout>
             }
           />
-          <Route
-            path="/find-jobs"
-            element={
-              <Layout showHero={false}>
-                <FindJobs />
-              </Layout>
-            }
-          />
 
           <Route
             path="/messages"
@@ -81,6 +72,14 @@ const App: React.FC = () => {
           />
           <Route
             path="/media"
+            element={
+              <Layout showHero={false}>
+                <Media />
+              </Layout>
+            }
+          />
+          <Route
+            path="/user/:userId"
             element={
               <Layout showHero={false}>
                 <Media />

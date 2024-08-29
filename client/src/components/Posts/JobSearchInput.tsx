@@ -18,7 +18,7 @@ const JobSearchInput = () => {
   };
 
   return (
-    <div className="mx-3 sm:mx-0 ">
+    <div className="mx-3 sm:mx-0">
       <div className="flex items-center relative">
         <FaSearch className="absolute left-3" />
         <form onSubmit={(e) => handleSubmit(e)} className="w-full">
