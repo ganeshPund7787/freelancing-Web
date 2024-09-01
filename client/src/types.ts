@@ -104,3 +104,9 @@ export type MessageType = {
   message: string;
   shouldShake: boolean;
 };
+
+export type GetUserProfile = {
+  user: ClientType | CivilUserType | any;
+  Posts?: PostType[];
+  JobPosts: JobPostType[];
+};

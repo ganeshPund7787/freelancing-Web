@@ -14,6 +14,7 @@ import PostRouter from "./routers/post.routes";
 import JobPostRouter from "./routers/jobPost.routes";
 
 import MsgRoute from "./routers/message.routes";
+import userRoute from "./routers/user.routes";
 
 import { app, server } from "./socket/socket";
 import { isAuthenticated } from "./middleware/Auth.middleware";
@@ -46,6 +47,7 @@ app.use("/api/post", PostRouter);
 app.use("/api/job-post", JobPostRouter);
 
 app.use("/api/message", isAuthenticated, MsgRoute);
+app.use("/api/both-user", isAuthenticated, userRoute);
 
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../client/dist/index.html"));

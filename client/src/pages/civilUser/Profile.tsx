@@ -13,11 +13,11 @@ import ExperianceCard from "@/components/civilUser/ExperianceCard";
 import AddCertifications from "@/components/civilUser/AddCertifications";
 import ProjectSection from "@/components/civilUser/ProjectSection";
 import LogOut from "@/components/LogOut";
-import CreatePost from "@/components/CreatePost";
 import { useEffect, useState } from "react";
 import useGetPost from "@/Hooks/useFetchPost";
-import PostCard from "@/components/PostCard";
 import UpdateProfileHead from "@/components/civilUser/UpdateProfileHead";
+import CreatePost from "@/components/BothUser/CreatePost";
+import PostCard from "@/components/Posts/PostCard";
 
 const Profile = () => {
   const { CurrentCivilUser, loading } = useAppSelectore((state) => state.user);

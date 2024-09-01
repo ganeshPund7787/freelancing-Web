@@ -1,5 +1,5 @@
 import { useAppSelectore } from "@/App/store";
-import PostCard from "@/components/PostCard";
+import PostCard from "@/components/Posts/PostCard";
 import useGetAllPost from "@/Hooks/Posts/useGetAllPost";
 import { useEffect } from "react";
 
@@ -22,7 +22,7 @@ const Media = () => {
             posts.length > 0 &&
             posts.map((post) => {
               if (defaultUser?._id === post.userId) return;
-              return <PostCard post={post} user={post?.user} />;
+              return <PostCard key={post?._id} post={post} user={post?.user} />;
             })}
           {loading ? (
             <div className="text-center sm:text-[15rem]">

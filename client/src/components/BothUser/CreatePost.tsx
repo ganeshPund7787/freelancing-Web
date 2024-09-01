@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Dialog,
   DialogClose,
@@ -6,7 +6,7 @@ import {
   DialogFooter,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
+} from "../ui/dialog";
 import {
   Form,
   FormControl,
@@ -14,7 +14,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from "../ui/form";
 import { useAppSelectore } from "@/App/store";
 import useUploadImg from "@/Hooks/useUploadImg";
 import { ChangeEvent, useRef, useState } from "react";

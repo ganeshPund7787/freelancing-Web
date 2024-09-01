@@ -13,7 +13,7 @@ import {
 import { FaLocationDot } from "react-icons/fa6";
 import ContactToClient from "../Posts/ContactToClient";
 import { useAppSelectore } from "@/App/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const JobPostDetails = ({ post }: any) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -114,12 +114,14 @@ const JobPostDetails = ({ post }: any) => {
                 <div className="flex flex-col sm:mt-0 mt-5">
                   <div className="flex">
                     <SheetClose className="sm:mx-5" asChild>
-                      <Button
-                        type="submit"
-                        className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
-                      >
-                        View Client Profile
-                      </Button>
+                      <Link to={`/user/${post.clientId}`}>
+                        <Button
+                          type="submit"
+                          className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
+                        >
+                          View Client Profile
+                        </Button>
+                      </Link>
                     </SheetClose>
                     <SheetClose className="sm:mx-5" asChild>
                       <ContactToClient user={post?.user} />

@@ -12,10 +12,10 @@ import {
 import SelectRoleFoeSignUp from "./pages/BothUserPages/SelectRoleFoeSignUp";
 import Layout from "./layout/Layout";
 import { useAppSelectore } from "./App/store";
-import ProtectRoute from "./components/ProtectRoute";
+import ProtectRoute from "./components/ProtectRoutes/ProtectRoute";
 import Profile from "./pages/civilUser/Profile";
-import { CivilProtectRoute } from "./components/CivilProtectRoute";
-import ClientProtectRoute from "./components/ClientProtectRoute";
+import { CivilProtectRoute } from "./components/ProtectRoutes/CivilProtectRoute";
+import ClientProtectRoute from "./components/ProtectRoutes/ClientProtectRoute";
 import ClientProfile from "./pages/client User/ClientProfile";
 import CreateJobPost from "./components/ClientUser/CreateJobPost";
 import Messages from "./pages/BothUserPages/Messages";
@@ -25,6 +25,7 @@ import SignIn from "./pages/BothUserPages/SignIn";
 import SignUp from "./pages/civilUser/SignUp";
 import SignUpClient from "./pages/client User/SignUpClient";
 import Media from "./pages/BothUserPages/Media";
+import UserProfile from "./pages/BothUserPages/UserProfile";
 
 const App: React.FC = () => {
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
@@ -82,7 +83,7 @@ const App: React.FC = () => {
             path="/user/:userId"
             element={
               <Layout showHero={false}>
-                <Media />
+                <UserProfile />
               </Layout>
             }
           />

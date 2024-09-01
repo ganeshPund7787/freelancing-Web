@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useCivilApi } from "@/API/useCivilUserApi";
 import { useAppSelectore } from "@/App/store";
 import FormInput from "@/components/FormInput";
-import OAuth from "@/components/OAuth";
+import OAuth from "@/components/BothUser/OAuth";
 
 const formSchema = z.object({
   email: z.string().trim().min(5, "required"),

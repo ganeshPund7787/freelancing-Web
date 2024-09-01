@@ -1,4 +1,4 @@
-import ClientPost from "@/components/ClientPost";
+import ClientPost from "@/components/Posts/ClientPost";
 import JobSearchInput from "@/components/Posts/JobSearchInput";
 
 const Home = () => {

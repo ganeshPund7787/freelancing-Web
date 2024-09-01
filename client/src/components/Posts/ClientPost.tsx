@@ -1,5 +1,5 @@
 import useGetAllJobPost from "@/Hooks/Posts/useGetAllJobPost";
-import JobPostCard from "./ClientUser/JobPostCard";
+import JobPostCard from "../ClientUser/JobPostCard";
 
 const ClientPost = () => {
   const { posts, loading } = useGetAllJobPost();
@@ -13,7 +13,7 @@ const ClientPost = () => {
       ) : (
         <>
           {posts?.map((post) => (
-            <JobPostCard post={post} />
+            <JobPostCard key={post} post={post} />
           ))}
         </>
       )}

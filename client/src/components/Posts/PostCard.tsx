@@ -1,14 +1,15 @@
 import { BiLike } from "react-icons/bi";
 import { CivilUserType, ClientType, PostType } from "@/types";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 import EditPost from "./EditPost";
 import { MdDelete } from "react-icons/md";
 import useGetPost from "@/Hooks/useFetchPost";
 import { toast } from "react-toastify";
 import { useAppSelectore } from "@/App/store";
-import CommentInput from "./Posts/CommentInput";
+import CommentInput from "./CommentInput";
 import { FaRegCommentDots } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 type Props = {
   post: PostType;
@@ -52,15 +53,19 @@ const PostCard = ({ post, user }: Props) => {
     <div className="flex flex-col md:mx-52 border border-slate-500">
       <div className="w-full flex justify-between items-center">
         <div className="flex gap-3 items-center font-semibold p-3">
-          {" "}
-          {imageUrl && (
-            <img
-              src={imageUrl}
-              alt="User Picture"
-              className="h-10 w-10 object-cover rounded-full"
-            />
-          )}
-          <h1>{user.fullName}</h1>
+          <Link
+            to={`/user/${user?._id}`}
+            className="flex gap-3 items-center font-semibold p-3"
+          >
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt="User Picture"
+                className="h-10 w-10 object-cover rounded-full"
+              />
+            )}
+            <h1>{user.fullName}</h1>
+          </Link>
         </div>
         <div className="flex gap-5 mx-2 items-center">
           {defaultUser?._id === post.userId && (
