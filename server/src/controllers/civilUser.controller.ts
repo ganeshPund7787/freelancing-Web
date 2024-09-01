@@ -88,7 +88,6 @@ export const addSkillsAndWork = async (
       const finalUser = await CivilUser.findById(id).select("-password");
       return res.status(200).json(finalUser);
     } else {
-      console.log(req.body);
       user.workExperience.push(req.body);
       await user.save();
 
@@ -105,8 +104,6 @@ export const UserAchivements = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body);
-  console.log(req._id);
   res.status(400).json({
     success: false,
     message: "Hello",

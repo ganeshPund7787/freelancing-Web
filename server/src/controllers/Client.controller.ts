@@ -32,7 +32,6 @@ export const CreateClient = async (
     });
 
     await newClient.save();
-    console.log(newClient);
     res.status(202).json({
       success: true,
       message: "Client register success",
@@ -60,30 +59,9 @@ export const UpdateClient = async (
     const updatedClient = await Client.findById(ClientId);
     res.status(201).json(updatedClient);
   } catch (error) {
-    console.log(`Error while backend : `, error);
     next(error);
   }
 };
-
-// export const getClient = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     // console.log(`first`);
-//     const client = await Client.findById(req.params.id).select("-password");
-//     if (!client) return next(errorHandler(400, "Client Not Found"));
-//     res.status(200).json({
-//       fullName: client.fullName,
-//       email: client.email,
-//       address: client.address,
-//     });
-//   } catch (error: any) {
-//     next(error.message);
-//     console.log(`Error while get Client : ${error}`);
-//   }
-// };
 
 export const getAllClient = async (
   req: Request,
@@ -99,7 +77,6 @@ export const getAllClient = async (
 
     res.status(200).json(filterUsers);
   } catch (error: any) {
-    console.log(`Error while get Side Bar usrs : ${error.message}`);
     next(error);
   }
 };

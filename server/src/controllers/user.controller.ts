@@ -40,8 +40,9 @@ export const GetCLientUser = async (
     if (!user) {
       return next(errorHandler(400, "Techical issue ! refresh the page"));
     }
-    const userJobPost = await JobPost.find({ userId });
+    const userJobPost = await JobPost.find({ clientId: userId });
     const userPosts = await Post.find({ userId });
+    
     res.status(200).json({ user, userJobPost, userPosts });
   } catch (error) {
     next(error);

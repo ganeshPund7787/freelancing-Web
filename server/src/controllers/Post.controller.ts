@@ -87,34 +87,6 @@ export const deletePost = async (
   }
 };
 
-// export const GetAllPosts = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const result: PostType[] = await Post.find().sort({ createdAt: -1 });
-//     console.log(`first`);
-//     const users: ClientTypes | CivilUserType | any = [];
-
-//     for (const post of result) {
-//       let user = await Client.findById(post.userId).select("-password");
-//       if (user) {
-//         users.push(user);
-//         return;
-//       } else {
-//         user = await CivilUser.findById(post.userId).select("-password");
-//         users.push(user);
-//       }
-//     }
-
-//     res.status(200).json({ result, users });
-
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 export const GetAllPosts = async (
   req: Request,
   res: Response,
@@ -129,8 +101,8 @@ export const GetAllPosts = async (
         if (!user) {
           user = await CivilUser.findById(post.userId).select("-password");
         }
-        return { ...post.toObject(), user }; 
-      })  
+        return { ...post.toObject(), user };
+      })
     );
 
     res.status(200).json(postsWithUsers);

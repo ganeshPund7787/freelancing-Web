@@ -45,7 +45,6 @@ export const Register = async (
       message: "Account created",
     });
   } catch (error) {
-    console.log(`Error while register : `, error);
     next(error);
   }
 };
@@ -129,7 +128,6 @@ export const LoginClient = async (
       .json(rest);
   } catch (error) {
     next(error);
-    console.log(`Error while client login`, error);
   }
 };
 
@@ -144,7 +142,7 @@ export const logOut = async (
       message: "User Logout Successfully",
     });
   } catch (error: any) {
-    console.log(`eRROR WHILE LOGOUT: `, error);
+    next(error);
   }
 };
 
@@ -162,7 +160,6 @@ export const getAllCivilUsers = async (
 
     res.status(200).json(filterUsers);
   } catch (error: any) {
-    console.log(`Error while get Side Bar usrs : ${error.message}`);
     next(error);
   }
 };

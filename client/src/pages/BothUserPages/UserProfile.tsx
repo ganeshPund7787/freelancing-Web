@@ -10,14 +10,18 @@ const UserProfile = () => {
   useEffect(() => {
     getProfile(userId);
   }, [userId]);
-  console.log("User: ", user);
+
   
   return (
     <>
       {!loading && (
         <div>
-          {user?.role === "client" ? (
-            <ClientProfile Client={user} />
+          {user?.user?.role === "client" ? (
+            <ClientProfile
+              Client={user?.user}
+              userPosts={user?.userPosts}
+              userJobPost={user?.userJobPost}
+            />
           ) : (
             "Civil Engineer"
           )}

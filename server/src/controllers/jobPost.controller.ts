@@ -13,7 +13,6 @@ export const createJobPost = async (
   try {
     const { heading } = req.body;
     const clientId = req._id;
-    console.log(req.body);
     const isPostExist = await JobPost.findOne({ heading });
     if (isPostExist) return next(errorHandler(400, "Post Already exist"));
 
@@ -54,7 +53,6 @@ export const getAllPosts = async (
         return { ...jobPost.toObject(), user };
       })
     );
-    console.log(postWithUsers);
     res.status(200).json(postWithUsers);
   } catch (error: any) {
     next(error.message);
@@ -109,21 +107,6 @@ export const SearchJobPosts = async (
   }
 };
 
-// export const SearchJobPosts = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const query = constructSearchQuery(req.query);
-
-//     const result = await JobPost.find(query);
-//     res.status(200).json(result);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 export const SearchHeadingPost = async (
   req: Request,
   res: Response,
@@ -139,36 +122,3 @@ export const SearchHeadingPost = async (
     next(error);
   }
 };
-
-// const constructSearchQuery = (queryParams: any) => {
-//   let constructedQuery: any = {};
-
-//   if (queryParams.experianceLevel) {
-//     constructedQuery.experianceLevel = new RegExp(
-//       queryParams.experianceLevel,
-//       "i"
-//     );
-//   }
-
-//   if (queryParams.HoursePerWeak) {
-//     constructedQuery.HoursePerWeak = {
-//       $gte: parseInt(queryParams.HoursePerWeak.toString()),
-//     };
-//   }
-
-//   if (queryParams.skills) {
-//     constructedQuery.skills = {
-//       $all: Array.isArray(queryParams.skills)
-//         ? queryParams.skills
-//         : [queryParams.skills],
-//     };
-//   }
-
-//   if (queryParams.salary) {
-//     constructedQuery.salary = {
-//       $lte: parseInt(queryParams.salary.toString()),
-//     };
-//   }
-
-//   return constructedQuery;
-// };
