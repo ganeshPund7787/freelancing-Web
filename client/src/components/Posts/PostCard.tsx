@@ -50,7 +50,7 @@ const PostCard = ({ post, user }: Props) => {
 
   if (!user) return <div>No Post Availabel</div>;
   return (
-    <div className="flex flex-col md:mx-52 border border-slate-500">
+    <div className="flex flex-col sm:h-full h-[40rem]">
       <div className="w-full flex justify-between items-center">
         <div className="flex gap-3 items-center font-semibold p-3">
           <Link
@@ -64,7 +64,7 @@ const PostCard = ({ post, user }: Props) => {
                 className="h-10 w-10 object-cover rounded-full"
               />
             )}
-            <h1>{user.fullName}</h1>
+            <h1 className="hover:underline">{user.fullName}</h1>
           </Link>
         </div>
         <div className="flex gap-5 mx-2 items-center">
@@ -123,6 +123,7 @@ const PostCard = ({ post, user }: Props) => {
         <span className="my-1 mx-4">{post.likes?.length} likes</span>
       )}
       <div className="">{IsCommentVisible && <CommentInput />}</div>
+      <hr />
     </div>
   );
 };

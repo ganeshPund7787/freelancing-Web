@@ -47,6 +47,7 @@ export type CivilUserType = {
   certification?: string;
   projects?: ProjectsType[];
   languages?: string[];
+  language?: string;
 };
 
 export type ClientType = {

@@ -15,15 +15,19 @@ const Media = () => {
 
   return (
     <>
-      <div className="px-1 sm:px-32 md:">
-        <div className="flex flex-col gap-3">
-          {posts &&
-            !loading &&
-            posts.length > 0 &&
-            posts.map((post) => {
-              if (defaultUser?._id === post.userId) return;
-              return <PostCard key={post?._id} post={post} user={post?.user} />;
-            })}
+      <div className="px-1 h-full md:px-36">
+        <div className="flex flex-col gap-5">
+          <div className="border border-slate-500">
+            {posts &&
+              !loading &&
+              posts.length > 0 &&
+              posts.map((post) => {
+                if (defaultUser?._id === post.userId) return;
+                return (
+                  <PostCard key={post?._id} post={post} user={post?.user} />
+                );
+              })}
+          </div>
           {loading ? (
             <div className="text-center sm:text-[15rem]">
               <span className="loading loading-dots loading-lg"></span>

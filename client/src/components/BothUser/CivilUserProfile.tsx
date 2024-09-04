@@ -17,12 +17,15 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="w-full mt-5 md:w-[30%]">
-          <div className="flex flex-col items-center p-6">
+          <h1 className="font-bold my-3 sm:pl-0 pl-5">Known Languages</h1>
+          <div className="flex flex-col items-center px-6">
             <UserLanguages CurrentCivilUser={CurrentCivilUser} />
           </div>
+          <h1 className="font-bold my-5 sm:pl-0 pl-5">Education</h1>
           <UserEducation CurrentCivilUser={CurrentCivilUser} />
         </div>
         <div className="border-t-2 md:border-l-2 md:border-t-0 border-slate-500 w-full md:w-[70%]">
+          <h1 className="font-bold my-5  pl-5">Skill</h1>
           <div className="flex flex-wrap gap-5 py-2 px-6">
             {CurrentCivilUser?.skills &&
               CurrentCivilUser?.skills?.length > 0 &&

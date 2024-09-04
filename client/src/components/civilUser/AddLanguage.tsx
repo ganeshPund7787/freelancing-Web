@@ -32,7 +32,6 @@ const AddLanguage = () => {
   });
 
   const onSubmit = (values: UserLanguageFormData) => {
-    console.log(values);
     addLanAndEducation(values);
     form.reset();
   };
