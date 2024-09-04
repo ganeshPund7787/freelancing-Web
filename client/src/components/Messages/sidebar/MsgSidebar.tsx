@@ -15,7 +15,7 @@ const MsgSidebar = () => {
   };
 
   return (
-    <div className="flex borderp-3 border-slate-600 sm:w-[20rem] flex-col gap-5">
+    <div className="flex borderp-3 border-slate-600 sm:w-[20rem] flex-col gap-5 h-full">
       <div>
         <h1 className="md:text-3xl text-cyan-400 font-semibold">Messages</h1>
       </div>
@@ -42,11 +42,13 @@ const MsgSidebar = () => {
           Civil Engineers
         </Button>
       </div>
-      {selectType === "Client" ? (
-        <ClientConversations />
-      ) : (
-        <CivilConversations />
-      )}
+      <div className="">
+        {selectType === "Client" ? (
+          <ClientConversations />
+        ) : (
+          <CivilConversations />
+        )}
+      </div>
     </div>
   );
 };

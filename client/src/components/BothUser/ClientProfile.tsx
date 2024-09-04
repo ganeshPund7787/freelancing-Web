@@ -1,6 +1,6 @@
 import { ClientType, JobPostType, PostType } from "@/types";
-import ClientAboutInfoProfile from "../Posts/ClientAboutInfoProfile";
-import ClientProfileHead from "../Posts/ClientProfileHead";
+import ClientAboutInfoProfile from "../Posts/Client/ClientAboutInfoProfile";
+import ClientProfileHead from "../Posts/Client/ClientProfileHead";
 import PostCard from "../Posts/PostCard";
 import JobPostCard from "../ClientUser/JobPostCard";
 

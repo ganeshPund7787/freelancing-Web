@@ -1,5 +1,5 @@
+import JobPostCard from "@/components/ClientUser/JobPostCard";
 import useGetAllJobPost from "@/Hooks/Posts/useGetAllJobPost";
-import JobPostCard from "../ClientUser/JobPostCard";
 
 const ClientPost = () => {
   const { posts, loading } = useGetAllJobPost();

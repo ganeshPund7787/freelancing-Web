@@ -140,6 +140,26 @@ const JobPostDetails = ({ post }: any) => {
               </>
             )}
           </SheetFooter>
+          <marquee
+            behavior="scroll"
+            direction="left"
+            scrollamount="5"
+            loop={1000}
+            className=" mt-10 bg-cyan-400 w-full p-1"
+          >
+            <div className="flex text-black shadow-lg gap-5">
+              <div className="">
+                <span>Contact</span> :- <span> {post?.user?.email}</span>
+              </div>
+              <div className="">{post?.heading}</div>
+              <div className="">Full Time or remote Job offer</div>
+              <div className="">
+                {post?.user?.company && (
+                  <span>{post?.user?.company} company</span>
+                )}
+              </div>
+            </div>
+          </marquee>
         </SheetContent>
       </Sheet>
     </div>

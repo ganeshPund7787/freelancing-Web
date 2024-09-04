@@ -7,8 +7,17 @@ import { store } from "./App/store.ts";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { SocketContextProvider } from "./context/SocketContext.tsx";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export const BACKEND_API_URL = import.meta.env.VITE_BACKEND_URL as string;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -25,9 +34,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       theme="colored"
     />
     <Provider store={store}>
-      <SocketContextProvider>
-        <App />
-      </SocketContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
+      </QueryClientProvider>
     </Provider>
   </React.StrictMode>
 );

@@ -1,5 +1,4 @@
 import { useAppSelectore } from "@/App/store";
-import { SlLocationPin } from "react-icons/sl";
 import AddLanguage from "@/components/civilUser/AddLanguage";
 import AddEducation from "@/components/civilUser/AddEducation";
 import AddSkills from "@/components/civilUser/AddSkills";
@@ -7,8 +6,7 @@ import AddWorkExperiance, {
   UserExperianceFormData,
 } from "@/components/civilUser/AddWorkExperiance";
 
-import { EducationType, PostType } from "@/types";
-import EducationCard from "@/components/civilUser/EducationCard";
+import { PostType } from "@/types";
 import ExperianceCard from "@/components/civilUser/ExperianceCard";
 import AddCertifications from "@/components/civilUser/AddCertifications";
 import ProjectSection from "@/components/civilUser/ProjectSection";
@@ -18,6 +16,9 @@ import useGetPost from "@/Hooks/useFetchPost";
 import UpdateProfileHead from "@/components/civilUser/UpdateProfileHead";
 import CreatePost from "@/components/BothUser/CreatePost";
 import PostCard from "@/components/Posts/PostCard";
+import CivilProfilHead from "@/components/Posts/Civil User/CivilProfilHead";
+import UserLanguages from "@/components/Posts/Civil User/UserLanguages";
+import UserEducation from "@/components/Posts/Civil User/UserEducation";
 
 const Profile = () => {
   const { CurrentCivilUser, loading } = useAppSelectore((state) => state.user);
@@ -50,26 +51,7 @@ const Profile = () => {
             <div className="flex flex-col min-h-full md:p-5">
               <div className="flex justify-between items-center min-h-full rounded-t-[1rem] max-w-full p-1 md:p-5 border-b-2 border-slate-500">
                 {/* Profile Img, name and Address */}
-                <div className="flex flex-col justify-center md:flex-row">
-                  <div className="avatar">
-                    {/* online */}
-                    <div className="ml-6 md:ml-0 h-24 rounded-full">
-                      <img
-                        src={CurrentCivilUser.photoUrl}
-                        className="h-40 w-40"
-                      />
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <h1 className="md:text-2xl font-semibold">
-                      {CurrentCivilUser.fullName}
-                    </h1>
-                    <p className="mt-2 flex gap-1 items-center text-sm lowercase">
-                      <SlLocationPin /> {CurrentCivilUser.city},{" "}
-                      {CurrentCivilUser.state}, {CurrentCivilUser.country}
-                    </p>
-                  </div>
-                </div>
+                <CivilProfilHead CurrentCivilUser={CurrentCivilUser} />
 
                 {/* Profile Head & Update Button */}
                 <div className="cursor-pointer relative right-0 p-2 border-cyan-500 hover:bg-opacity-30 rounded-full">
@@ -92,17 +74,7 @@ const Profile = () => {
                         <AddLanguage />
                       </div>
                     </div>
-                    <div className="flex flex-col w-full gap-4 mt-5">
-                      {CurrentCivilUser.languages &&
-                        CurrentCivilUser?.languages?.map((language: string) => (
-                          <span
-                            key={language}
-                            className="border flex items-center justify-between hover:bg-slate-800 hover:border-cyan-500 border-slate-600 rounded-full w-full px-8 py-2 "
-                          >
-                            {language}
-                          </span>
-                        ))}
-                    </div>
+                    <UserLanguages CurrentCivilUser={CurrentCivilUser} />
                   </div>
 
                   {/* Education...  */}
@@ -116,17 +88,7 @@ const Profile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col py-3 items-center gap-3 px-10">
-                    {CurrentCivilUser.education &&
-                      CurrentCivilUser.education.map(
-                        (education: EducationType) => (
-                          <EducationCard
-                            key={education.id}
-                            education={education}
-                          />
-                        )
-                      )}
-                  </div>
+                  <UserEducation CurrentCivilUser={CurrentCivilUser} />
                 </div>
 
                 {/* Skill & Work Experiance section */}

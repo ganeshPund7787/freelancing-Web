@@ -24,8 +24,7 @@ const JobSearchInput = () => {
         <form onSubmit={(e) => handleSubmit(e)} className="w-full">
           <input
             type="text"
-            autoFocus
-            value={headingInput}
+              value={headingInput}
             placeholder="Search for jobs"
             onChange={(e) => setHeadingInput(e.target.value)}
             className="text-white w-[60%] p-2 px-8 rounded-[0.3rem] bg-slate-800 border border-slate-500"

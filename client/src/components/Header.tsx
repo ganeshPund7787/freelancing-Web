@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <>
-      <nav className="flex sticky justify-between p-4">
+      <nav className="flex bg-slate-900 justify-between p-4">
         <div className="flex gap-5 items-center">
           <NavLink to={"/"} className="text-3xl text-cyan-400 font-semibold">
             civilHub
@@ -94,7 +94,7 @@ const Header = () => {
           <MobileNav />
         </div>
       </nav>
-      <hr className="text-slate-600" />
+      <hr className="text-cyan-600" />
     </>
   );
 };
