@@ -1,3 +1,4 @@
+import ShowProfilePicture from "@/components/BothUser/ShowProfilePicture";
 import { ClientType } from "@/types";
 import { SlLocationPin } from "react-icons/sl";
 
@@ -7,13 +8,11 @@ type Props = {
 
 const ClientProfileHead = ({ Client }: Props) => {
   return (
-    <div className="flex flex-col justify-center md:flex-row">
+    <div className="flex flex-col items-center sm:gap-0 gap-5 pt-5 justify-center md:flex-row">
       {" "}
       <div className="avatar">
         {/* online */}
-        <div className="ml-6 md:ml-0 h-24 rounded-full">
-          <img src={Client.profilePictureUrl} className="h-40 w-40" />
-        </div>
+        <ShowProfilePicture img={Client.profilePictureUrl} />
       </div>
       <div className="p-5">
         <h1 className="md:text-2xl text-cyan-400 font-semibold">

@@ -1,6 +1,7 @@
 import useUpdateUser from "@/Hooks/UserHook/useUpdateUser";
 import { ProjectsType } from "@/types";
 import { MdDelete } from "react-icons/md";
+import { useParams } from "react-router-dom";
 
 type Props = {
   Project: ProjectsType;
@@ -23,6 +24,10 @@ const ProjectCard = ({ Project }: Props) => {
     }
     return date.toLocaleDateString();
   };
+  const { userId } = useParams();
+  console.log("CurretParams 5/09/2024", userId);
+  console.log("Curret _id 5/09/2024", Project._id);
+
   return (
     <div className="md:p-5 flex flex-col gap-2 p-3 md:m-5 hover:bg-slate-800 hover:border-cyan-500 border rounded md:rounded-[1rem] border-slate-600">
       <div className="flex justify-between">

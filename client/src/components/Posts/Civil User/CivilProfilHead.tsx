@@ -1,3 +1,4 @@
+import ShowProfilePicture from "@/components/BothUser/ShowProfilePicture";
 import { CivilUserType } from "@/types";
 import { SlLocationPin } from "react-icons/sl";
 
@@ -5,16 +6,14 @@ export type Props = {
   CurrentCivilUser: CivilUserType;
 };
 const CivilProfilHead = ({ CurrentCivilUser }: Props) => {
-  if (!CurrentCivilUser) { 
-    return <>Not Found</>
+  if (!CurrentCivilUser) {
+    return <>Not Found</>;
   }
   return (
-    <div className="flex flex-col justify-center md:flex-row">
-      <div className="avatar">
+    <div className="flex items-center flex-col pt-5 sm:gap-0 gap-5 justify-center md:flex-row">
+      <div className="avatar ">
         {/* online */}
-        <div className="ml-6 md:ml-0 h-24 rounded-full">
-          <img src={CurrentCivilUser?.photoUrl} className="h-40 w-40" />
-        </div>
+        <ShowProfilePicture img={CurrentCivilUser?.photoUrl} />
       </div>
       <div className="p-5">
         <h1 className="md:text-2xl font-semibold">

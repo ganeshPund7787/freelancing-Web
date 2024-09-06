@@ -17,7 +17,7 @@ const userGetProfile = () => {
       );
       const data = await res.json();
       if (data.success == false) {
-        toast.warn(data?.message);
+        toast.warn("Bad Request");
         return;
       }
       setUser(data);

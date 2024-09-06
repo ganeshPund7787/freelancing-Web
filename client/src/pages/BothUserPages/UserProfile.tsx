@@ -2,12 +2,13 @@ import CivilUserProfile from "@/components/BothUser/CivilUserProfile";
 import ClientProfile from "@/components/BothUser/ClientProfile";
 import userGetProfile from "@/Hooks/BothUserHooks/userGetProfile";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
 const UserProfile = () => {
   const { userId } = useParams();
   const { getProfile, user } = userGetProfile();
+  const navigate = useNavigate();
 
   const { isLoading } = useQuery(
     ["getProfile", userId],
@@ -20,7 +21,10 @@ const UserProfile = () => {
   useEffect(() => {
     getProfile(userId);
   }, [userId]);
-
+  
+  if (!user) {
+    navigate("/media");
+  }
   return (
     <>
       {!isLoading && (
