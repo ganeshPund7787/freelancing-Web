@@ -4,7 +4,8 @@ type Props = {
   work: UserExperianceFormData;
 };
 
-const ExperianceCard = ({ work }: Props) => {
+const
+  ExperianceCard = ({ work }: Props) => {
   return (
     <div className="md:p-5 p-1 border rounded md:rounded-[1rem] border-slate-600">
       <div className="flex justify-between">

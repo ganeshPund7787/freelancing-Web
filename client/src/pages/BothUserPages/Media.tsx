@@ -16,8 +16,8 @@ const Media = () => {
   return (
     <>
       <div className="px-1 h-full md:px-36">
-        <div className="flex flex-col gap-5">
-          <div className="border border-slate-500">
+        <div className="">
+          <div className=" flex flex-col gap-5 ">
             {posts &&
               !loading &&
               posts.length > 0 &&

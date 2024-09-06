@@ -6,7 +6,7 @@ import EditProfile from "@/components/ClientUser/EditProfile";
 import LogOut from "@/components/LogOut";
 import ClientAboutInfoProfile from "@/components/Posts/Client/ClientAboutInfoProfile";
 import ClientProfileHead from "@/components/Posts/Client/ClientProfileHead";
-import PostCard from "@/components/Posts/PostCard";
+import ProfilePosts from "@/components/Posts/ProfilePosts";
 import { Button } from "@/components/ui/button";
 import useGetPost from "@/Hooks/useFetchPost";
 import { PostType } from "@/types";
@@ -69,13 +69,8 @@ const ClientProfile = () => {
                     </h1>
                     <CreatePost />
                   </div>
-                  <div className="p-5">
-                    {" "}
-                    {posts &&
-                      normalizedPosts?.map((post: PostType) => (
-                        <PostCard key={post._id} post={post} user={Client} />
-                      ))}
-                  </div>
+
+                  <ProfilePosts posts={normalizedPosts} user={Client} />
                 </div>
                 <div className=" rounded md:rounded-[1rem]">
                   <div className="flex items-center justify-between p-5">

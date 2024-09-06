@@ -50,12 +50,12 @@ const PostCard = ({ post, user }: Props) => {
 
   if (!user) return <div>No Post Availabel</div>;
   return (
-    <div className="flex flex-col sm:h-full h-[40rem]">
+    <div className="flex flex-col border bg-slate-800 shadow-2xl hover:border-cyan-700 border-slate-400 rounded-[0.5rem] sm:h-full h-[40rem]">
       <div className="w-full flex justify-between items-center">
-        <div className="flex gap-3 items-center font-semibold p-3">
+        <div className="flex items-center font-semibold p-3">
           <Link
             to={`/user/${user?._id}`}
-            className="flex gap-3 items-center font-semibold p-3"
+            className="flex gap-3 items-center font-semibold px-3"
           >
             {imageUrl && (
               <img
@@ -82,7 +82,7 @@ const PostCard = ({ post, user }: Props) => {
           )}
         </div>
       </div>
-
+      <hr className="text-slate-500" />
       <div className="relative mx-2 text-sm">
         <span>
           {isExpanded
@@ -123,7 +123,6 @@ const PostCard = ({ post, user }: Props) => {
         <span className="my-1 mx-4">{post.likes?.length} likes</span>
       )}
       <div className="">{IsCommentVisible && <CommentInput />}</div>
-      <hr />
     </div>
   );
 };

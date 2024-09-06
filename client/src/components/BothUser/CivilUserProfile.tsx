@@ -4,6 +4,7 @@ import UserLanguages from "../Posts/Civil User/UserLanguages";
 import UserEducation from "../Posts/Civil User/UserEducation";
 import ExperianceCard from "../civilUser/ExperianceCard";
 import ProjectCard from "../civilUser/ProjectCard";
+import ProfilePosts from "../Posts/ProfilePosts";
 
 type Props = {
   user: CivilUserType;
@@ -11,8 +12,6 @@ type Props = {
 };
 
 const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
-  console.log(CurrentCivilUser);
-
   return (
     <>
       {CurrentCivilUser && (
@@ -25,9 +24,17 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
               <h1 className="font-bold my-3 sm:pl-0 pl-5">Known Languages</h1>
               <div className="flex flex-col items-center px-6">
                 <UserLanguages CurrentCivilUser={CurrentCivilUser} />
+                {CurrentCivilUser?.languages &&
+                  CurrentCivilUser?.languages.length == 0 && (
+                    <h1 className="text-slate-400">Not Language Added </h1>
+                  )}
               </div>
               <h1 className="font-bold my-5 sm:pl-0 pl-5">Education</h1>
               <UserEducation CurrentCivilUser={CurrentCivilUser} />
+              {CurrentCivilUser?.education &&
+                CurrentCivilUser?.education.length === 0 && (
+                  <h1 className="text-slate-400">No Education Added </h1>
+                )}
             </div>
             <div className="border-t-2 md:border-l-2 md:border-t-0 border-slate-500 w-full md:w-[70%]">
               <h1 className="font-bold my-5 pl-5">Skill</h1>
@@ -42,6 +49,9 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
                       {skill}
                     </div>
                   ))}
+                {CurrentCivilUser?.skills?.length == 0 && (
+                  <span className="text-slate-400">No Skill Added </span>
+                )}
               </div>
               <h1 className="font-semibold pl-5">Work experiance</h1>
               <div className="flex flex-col my-5 gap-4 px-6">
@@ -50,6 +60,10 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
                   CurrentCivilUser?.workExperience.map((work: any) => (
                     <ExperianceCard key={work.id} work={work} />
                   ))}
+                {CurrentCivilUser?.workExperience &&
+                  CurrentCivilUser?.workExperience.length === 0 && (
+                    <h1 className="text-cyan-400">Freasher</h1>
+                  )}
               </div>
             </div>
           </div>
@@ -67,6 +81,10 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
                 No Projects Added !
               </center>
             )}
+          </div>
+          <div className="flex mx-20 flex-col gap-5">
+            <h1 className="font-bold">Posts/ Activity</h1>
+            <ProfilePosts posts={Posts} user={CurrentCivilUser} />
           </div>
         </div>
       )}

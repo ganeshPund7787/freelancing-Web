@@ -15,10 +15,10 @@ import { useEffect, useState } from "react";
 import useGetPost from "@/Hooks/useFetchPost";
 import UpdateProfileHead from "@/components/civilUser/UpdateProfileHead";
 import CreatePost from "@/components/BothUser/CreatePost";
-import PostCard from "@/components/Posts/PostCard";
 import CivilProfilHead from "@/components/Posts/Civil User/CivilProfilHead";
 import UserLanguages from "@/components/Posts/Civil User/UserLanguages";
 import UserEducation from "@/components/Posts/Civil User/UserEducation";
+import ProfilePosts from "@/components/Posts/ProfilePosts";
 
 const Profile = () => {
   const { CurrentCivilUser, loading } = useAppSelectore((state) => state.user);
@@ -151,19 +151,10 @@ const Profile = () => {
                     <CreatePost />
                   </div>
                   <div className="flex flex-col gap-5 md:p-5 p-1">
-                    {posts &&
-                      normalizedPosts?.map((post: PostType) => (
-                        <PostCard
-                          key={post._id}
-                          post={post}
-                          user={CurrentCivilUser}
-                        />
-                      ))}
-                    {normalizedPosts.length === 0 && (
-                      <div className="text-center text-red-500 text-2xl">
-                        You are not post any Post
-                      </div>
-                    )}
+                    <ProfilePosts
+                      posts={normalizedPosts}
+                      user={CurrentCivilUser}
+                    />
                   </div>
                 </div>
               </div>
