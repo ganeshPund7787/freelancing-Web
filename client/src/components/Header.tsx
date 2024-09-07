@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { useAppSelectore } from "@/App/store";
 import { Avatar } from "./ui/avatar";
@@ -7,11 +7,27 @@ import MobileNav from "./MobNav";
 import { MdOutlineFindInPage } from "react-icons/md";
 import { BiSolidMessageSquareDetail } from "react-icons/bi";
 import { MdPermMedia } from "react-icons/md";
+import { FormEvent, useState } from "react";
+import useSearchHeading from "@/Hooks/Posts/useSearchHeading";
 
 const Header = () => {
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
   const { Client } = useAppSelectore((state) => state.client);
 
+  const [headingInput, setHeadingInput] = useState<string>("");
+  const navigate = useNavigate();
+
+  const { search } = useSearchHeading();
+
+  const handleSubmit = (e: Event | FormEvent) => {
+    e.preventDefault();
+    if (!headingInput.trim()) return;
+    search(headingInput.trim());
+    setHeadingInput("");
+    navigate("/search");
+  };
+
+  console.log(headingInput);
   return (
     <>
       <nav className="flex bg-slate-900 justify-between p-4">
@@ -70,10 +86,15 @@ const Header = () => {
                   <FaSearch size={25} className="text-black" />
                 </svg>
               </div>
-              <input
-                type="text"
-                className="outline-none text-md bg-transparent w-full text-black font-sebold px-2"
-              />
+              <form onSubmit={handleSubmit}>
+                <input
+                  placeholder="search jobs"
+                  type="text"
+                  value={headingInput}
+                  onChange={(e) => setHeadingInput(e.target.value)}
+                  className="outline-none text-md bg-transparent w-full placeholder:text-black text-black font-sebold px-2"
+                />
+              </form>
             </div>
           </div>
           {CurrentCivilUser ? (

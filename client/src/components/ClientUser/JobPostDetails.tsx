@@ -142,7 +142,7 @@ const JobPostDetails = ({ post }: any) => {
             direction="left"
             scrollamount="5"
             loop={1000}
-            className=" mt-10 bg-slate-900 w-full p-1"
+            className=" mt-7 bg-slate-900 w-full p-1"
           >
             <div className="flex text-white shadow-lg gap-5">
               <div className="">
