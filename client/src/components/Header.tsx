@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { Input } from "./ui/input";
 import { FaSearch } from "react-icons/fa";
 import { useAppSelectore } from "@/App/store";
 import { Avatar } from "./ui/avatar";
@@ -57,13 +56,25 @@ const Header = () => {
         </div>
 
         <div className="md:flex hidden items-center gap-5">
-          <div className="flex items-center rounded-[1rem] border border-slate-600 px-2 w-72 ">
-            <Input
-              type="text"
-              placeholder="Search jobs"
-              className="border-none"
-            />
-            <FaSearch className="text-white font-normal" />
+          <div className="flex items-center rounded-[1rem] px-2  ">
+            <div className="p-2 overflow-hidden w-[38px] h-[38px] hover:w-[270px] bg-cyan-400 shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300">
+              <div className="flex items-center justify-center fill-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="Isolation_Mode"
+                  data-name="Isolation Mode"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                >
+                  <FaSearch size={25} className="text-black" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                className="outline-none text-md bg-transparent w-full text-black font-sebold px-2"
+              />
+            </div>
           </div>
           {CurrentCivilUser ? (
             <Avatar>

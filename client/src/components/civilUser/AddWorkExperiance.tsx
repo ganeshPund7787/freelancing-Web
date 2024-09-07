@@ -7,7 +7,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { IoAdd } from "react-icons/io5";
 
 import { z } from "zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -16,6 +15,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import useUpdateUser from "@/Hooks/UserHook/useUpdateUser";
 
 import FormInput from "../FormInput";
+import AddButton from "../styleComponents/AddButton";
 
 const formSchema = z.object({
   id: z.string(),
@@ -49,10 +49,7 @@ const AddWorkExperiance = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button>
-          <IoAdd
-            className="border cursor-pointer p-2 border-cyan-500 rounded-full"
-            size={40}
-          />
+          <AddButton />
         </Button>
       </DialogTrigger>
 

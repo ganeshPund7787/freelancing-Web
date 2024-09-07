@@ -7,7 +7,7 @@ const CivilConversations = () => {
 
   return (
     <>
-      <div className="py-2 flex flex-col overflow-auto">
+      <div className="py-8 flex h-[56vh] flex-col gap-2 overflow-auto">
         {conversations.map((conversation, idx) => (
           <Conversation
             key={idx}

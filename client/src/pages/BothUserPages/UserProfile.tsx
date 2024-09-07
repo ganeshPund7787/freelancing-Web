@@ -4,6 +4,7 @@ import userGetProfile from "@/Hooks/BothUserHooks/userGetProfile";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
+import Loader from "@/components/styleComponents/Loader";
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -21,7 +22,7 @@ const UserProfile = () => {
   useEffect(() => {
     getProfile(userId);
   }, [userId]);
-  
+
   if (!user) {
     navigate("/media");
   }
@@ -40,9 +41,7 @@ const UserProfile = () => {
           )}
         </div>
       )}
-      {isLoading && (
-        <span className="text-center mx-auto loading loading-dots"></span>
-      )}
+      {isLoading && <Loader />}
     </>
   );
 };

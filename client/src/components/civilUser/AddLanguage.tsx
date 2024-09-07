@@ -7,7 +7,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { IoAdd } from "react-icons/io5";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -15,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import useUpdateUser from "@/Hooks/UserHook/useUpdateUser";
 import FormInput from "../FormInput";
+import AddButton from "../styleComponents/AddButton";
 
 const formSchema = z.object({
   language: z.string().trim().min(2, "required"),
@@ -40,10 +40,7 @@ const AddLanguage = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button>
-          <IoAdd
-            className="border cursor-pointer p-2 border-cyan-500 rounded-full"
-            size={40}
-          />
+          <AddButton />
         </Button>
       </DialogTrigger>
 

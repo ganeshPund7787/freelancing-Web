@@ -1,10 +1,11 @@
 import { CivilUserType, ProjectsType } from "@/types";
 import { Button } from "../ui/button";
-import { IoAdd } from "react-icons/io5";
+
 import { useAppDispatch, useAppSelectore } from "@/App/store";
 import { startAddProject } from "../../App/features/civilUser";
 import ProjectCard from "./ProjectCard";
 import AddProject from "./AddProject";
+import AddButton from "../styleComponents/AddButton";
 
 type Props = {
   user: CivilUserType | any;
@@ -18,12 +19,8 @@ const ProjectSection = ({ user }: Props) => {
     <div className="border-2 border-slate-500 rounded md:rounded-[1rem]">
       <div className="flex items-center justify-between p-5">
         <h1 className="text-2xl font-semibold">My Projects </h1>
-        <Button>
-          <IoAdd
-            onClick={() => dispatch(startAddProject())}
-            className="border p-1 border-cyan-500 hover:bg-opacity-30 rounded-full"
-            size={40}
-          />
+        <Button onClick={() => dispatch(startAddProject())}>
+          <AddButton />
         </Button>
       </div>
       <hr className="text-slate-500" />

@@ -1,5 +1,6 @@
 import { useAppSelectore } from "@/App/store";
 import PostCard from "@/components/Posts/PostCard";
+import Loader from "@/components/styleComponents/Loader";
 import useGetAllPost from "@/Hooks/Posts/useGetAllPost";
 import { useEffect } from "react";
 
@@ -28,11 +29,7 @@ const Media = () => {
                 );
               })}
           </div>
-          {loading ? (
-            <div className="text-center sm:text-[15rem]">
-              <span className="loading loading-dots loading-lg"></span>
-            </div>
-          ) : null}
+          {loading ? <Loader /> : null}
         </div>
       </div>
     </>
