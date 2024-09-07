@@ -14,6 +14,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import ContactToClient from "../Posts/ContactToClient";
 import { useAppSelectore } from "@/App/store";
 import { Link, useNavigate } from "react-router-dom";
+import ContactBtn from "../styleComponents/ContactBtn";
 
 const JobPostDetails = ({ post }: any) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -48,7 +49,7 @@ const JobPostDetails = ({ post }: any) => {
           className="h-[80vh] bg-slate-800 overflow-y-auto"
         >
           <SheetHeader>
-            <SheetTitle className="sm:text-[1.3rem]">
+            <SheetTitle className="text-cyan-400 sm:text-[1.3rem]">
               {post?.heading}
             </SheetTitle>
           </SheetHeader>
@@ -112,27 +113,23 @@ const JobPostDetails = ({ post }: any) => {
             {Client?._id !== post.clientId && (
               <>
                 <div className="flex flex-col sm:mt-0 mt-5">
-                  <div className="flex">
-                    <SheetClose className="sm:mx-5" asChild>
+                  <div className="sm:grid-cols-3 grid-cols-2 sm:grid-rows-1 grid-rows-2">
+                    <SheetClose asChild>
                       <Link to={`/user/${post.clientId}`}>
-                        <Button
-                          type="submit"
-                          className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
-                        >
-                          View Client Profile
+                        <Button type="submit">
+                          <ContactBtn text={"View Profile"} />
                         </Button>
                       </Link>
                     </SheetClose>
-                    <SheetClose className="sm:mx-5" asChild>
+                    <SheetClose asChild>
                       <ContactToClient user={post?.user} />
                     </SheetClose>
-                    <SheetClose className="sm:mx-5" asChild>
+                    <SheetClose asChild>
                       <Button
                         onClick={() => Navigate("/messages")}
                         type="button"
-                        className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
                       >
-                        Send Message
+                        <ContactBtn text={"Send Message"} />
                       </Button>
                     </SheetClose>
                   </div>
@@ -145,9 +142,9 @@ const JobPostDetails = ({ post }: any) => {
             direction="left"
             scrollamount="5"
             loop={1000}
-            className=" mt-10 bg-cyan-400 w-full p-1"
+            className=" mt-10 bg-slate-900 w-full p-1"
           >
-            <div className="flex text-black shadow-lg gap-5">
+            <div className="flex text-white shadow-lg gap-5">
               <div className="">
                 <span>Contact</span> :- <span> {post?.user?.email}</span>
               </div>

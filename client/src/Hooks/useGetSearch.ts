@@ -1,6 +1,7 @@
 import { BACKEND_API_URL } from "@/main";
 import { JobPostType } from "@/types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const useGetSearch = () => {
   const [searchJobs, setSearchJobs] = useState<JobPostType[] | undefined>([]);
@@ -8,7 +9,6 @@ const useGetSearch = () => {
   const SearchFilter = async (search: JobPostType): Promise<void> => {
     try {
       const queryParams = new URLSearchParams();
-
       if (search.experianceLevel) {
         queryParams.append("experianceLevel", search.experianceLevel);
       }
@@ -25,6 +25,8 @@ const useGetSearch = () => {
         search.skills.forEach((skill) => queryParams.append("skills", skill));
       }
 
+      console.log("queryParams : ", queryParams);
+
       const res = await fetch(
         `${BACKEND_API_URL}/api/job-post/search?${queryParams.toString()}`,
         {
@@ -40,8 +42,9 @@ const useGetSearch = () => {
       }
 
       setSearchJobs(data);
+      return data;
     } catch (error) {
-      console.error("Error while searching:", error);
+      toast.warn("Ckeck Your Internet");
     }
   };
 

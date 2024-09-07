@@ -1,9 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { JobPost } from "../models/jobPost.model";
 import { errorHandler } from "../utils/error.Handler";
-import { JobPostType } from "../shared/Client.types";
 import { Client } from "../models/Client.model";
-import { CivilUser } from "../models/civilUser.model";
 
 export const createJobPost = async (
   req: Request,
@@ -99,8 +97,12 @@ export const SearchJobPosts = async (
 ) => {
   try {
     const query = constructSearchQuery(req.query);
+    console.log(query);
+
+    console.log("Direct Query : ", req.query);
 
     const result = await JobPost.find(query);
+    console.log("Result: ", result);
     res.status(200).json(result);
   } catch (error) {
     next(error);

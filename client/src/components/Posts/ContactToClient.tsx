@@ -20,6 +20,7 @@ import { useAppSelectore } from "@/App/store";
 import FormInput from "../FormInput";
 import useSendEmail from "@/Hooks/Posts/useSendEmail";
 import { useState } from "react";
+import ContactBtn from "../styleComponents/ContactBtn";
 
 const formSchema = z.object({
   from: z.string().trim().min(5, "Required"),
@@ -60,11 +61,8 @@ const ContactToClient = ({ user }: Props) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button
-          onClick={() => setIsDialogOpen(true)}
-          className="hover:bg-cyan-400 hover:scale-105 rounded-[0.3rem] bg-cyan-400 text-black"
-        >
-          Send Email
+        <Button onClick={() => setIsDialogOpen(true)}>
+          <ContactBtn text={"Send Email"} />
         </Button>
       </DialogTrigger>
 
