@@ -6,7 +6,7 @@ type Props = {
 
 const ClientAboutInfoProfile = ({ Client }: Props) => {
   return (
-    <div className="flex flex-col gap-3 min-h-full rounded-t-[1rem] max-w-full p-1 md:p-5 border-b-2 border-slate-500">
+    <div className="flex flex-col gap-3 min-h-full rounded-t-[1rem] max-w-full p-3 md:p-5 border-b-2 border-slate-500">
       {" "}
       {Client.email && (
         <div className="flex gap-3">

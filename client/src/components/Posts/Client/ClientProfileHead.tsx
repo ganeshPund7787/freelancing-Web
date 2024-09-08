@@ -8,7 +8,7 @@ type Props = {
 
 const ClientProfileHead = ({ Client }: Props) => {
   return (
-    <div className="flex flex-col items-center sm:gap-0 gap-5 pt-5 justify-center md:flex-row">
+    <div className="flex flex-col items-start sm:items-center sm:gap-0 gap-5 pt-5 justify-center md:flex-row">
       {" "}
       <div className="avatar">
         {/* online */}

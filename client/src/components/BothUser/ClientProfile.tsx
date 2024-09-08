@@ -22,7 +22,7 @@ const ClientProfile = ({ Client, userPosts, userJobPost }: Props) => {
         <ClientAboutInfoProfile Client={Client} />
       </div>
       <div className="flex mt-5 gap-7 flex-col min-h-full md:p-5">
-        <h1 className="text-sm sm:text-2xl">Posts/Activivty</h1>
+        <h1 className="text-sm sm:text-2xl ml-2">Posts/Activivty</h1>
         <div className=" rounded md:rounded-[1rem]">
           <div className="p-5">
             {userPosts &&
@@ -33,8 +33,8 @@ const ClientProfile = ({ Client, userPosts, userJobPost }: Props) => {
           </div>
         </div>
         <div className="rounded md:rounded-[1rem]">
-          <h1 className="text-sm sm:text-2xl">Job Hiring Posts</h1>
-          <div className="p-5">
+          <h1 className="text-sm sm:text-2xl ml-2">Job Hiring Posts</h1>
+          <div className="p-5 flex gap-5 flex-col md:flex-row">
             {userJobPost &&
               userJobPost?.map((post: JobPostType) => (
                 <JobPostCard key={post._id} post={post} />

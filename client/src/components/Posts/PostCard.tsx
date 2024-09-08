@@ -50,7 +50,7 @@ const PostCard = ({ post, user }: Props) => {
 
   if (!user) return <div>No Post Availabel</div>;
   return (
-    <div className="flex flex-col border bg-slate-800 shadow-2xl hover:border-cyan-700 border-slate-400 rounded-[0.5rem] sm:h-full h-[40rem]">
+    <div className="flex flex-col gap-4 border bg-slate-800 shadow-2xl hover:border-cyan-700 border-slate-400 rounded-[0.5rem] sm:h-[40rem]">
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center font-semibold p-3">
           <Link
@@ -81,8 +81,8 @@ const PostCard = ({ post, user }: Props) => {
             </>
           )}
         </div>
+        <hr className="text-slate-500" />
       </div>
-      <hr className="text-slate-500" />
       <div className="relative mx-2 text-sm">
         <span>
           {isExpanded
@@ -98,16 +98,16 @@ const PostCard = ({ post, user }: Props) => {
           </button>
         )}
       </div>
-      <div className="mx-3 mt-5">
+      <div className="mx-3 h-[70%]">
         {post.image && (
           <img
             src={post.image}
             alt=""
-            className="h-[90vh] w-full object-cover object-center"
+            className="h-full sm:h-full w-full object-cover object-center"
           />
         )}
       </div>
-      <div className="flex justify-between mt-5 mb-1">
+      <div className="flex justify-between mb-1">
         <Button className="flex gap-3">
           <BiLike size={25} /> like
         </Button>

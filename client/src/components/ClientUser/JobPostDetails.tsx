@@ -112,27 +112,22 @@ const JobPostDetails = ({ post }: any) => {
           <SheetFooter>
             {Client?._id !== post.clientId && (
               <>
-                <div className="flex flex-col sm:mt-0 mt-5">
-                  <div className="sm:grid-cols-3 grid-cols-2 sm:grid-rows-1 grid-rows-2">
-                    <SheetClose asChild>
-                      <Link to={`/user/${post.clientId}`}>
-                        <Button type="submit">
-                          <ContactBtn text={"View Profile"} />
-                        </Button>
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <ContactToClient user={post?.user} />
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Button
-                        onClick={() => Navigate("/messages")}
-                        type="button"
-                      >
-                        <ContactBtn text={"Send Message"} />
+                <div className="flex sm:flex-row flex-col sm:gap-0 gap-5 items-center justify-center sm:mt-0 mt-5">
+                  <SheetClose asChild>
+                    <Link to={`/user/${post.clientId}`}>
+                      <Button type="submit">
+                        <ContactBtn text={"View Profile"} />
                       </Button>
-                    </SheetClose>
-                  </div>
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <ContactToClient user={post?.user} />
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <Button onClick={() => Navigate("/messages")} type="button">
+                      <ContactBtn text={"Send Message"} />
+                    </Button>
+                  </SheetClose>
                 </div>
               </>
             )}
@@ -142,7 +137,7 @@ const JobPostDetails = ({ post }: any) => {
             direction="left"
             scrollamount="5"
             loop={1000}
-            className=" mt-7 bg-slate-900 w-full p-1"
+            className="mt-7 bg-slate-900 w-full p-1"
           >
             <div className="flex text-white shadow-lg gap-5">
               <div className="">

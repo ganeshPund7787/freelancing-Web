@@ -45,8 +45,8 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row w-full justify-between gap-5 ">
-      <div className="rounded-lg mx-10 md:mx-0 md:block p-3 w-[30%] h-[100vh] top-10">
+    <div className="flex flex-col lg:flex-row w-full justify-between sm:gap-5">
+      <div className="rounded-lg mx-10 md:mx-0 md:block p-3 sm:w-[30%] sm:h-[100vh] h-[85vh] top-10">
         <div className="space-y-5 overflow-y-auto overflow-hidden ">
           <h1 className="text-lg font-semibold border-b border-slate-300 pb-5">
             Filter By:
@@ -57,7 +57,7 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="flex flex-col h-fit w-[70%]  gap-4">
+      <div className="flex flex-col sm:h-fit sm:w-[70%] sm:mx-0 mx-3 gap-4">
         <h1>
           {searchJobs && searchJobs.length > 0 && (
             <div className="">{searchJobs?.length} Jobs Found</div>

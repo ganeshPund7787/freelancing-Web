@@ -1,6 +1,8 @@
+
 export type Props = {
   text: string;
 };
+
 const ContactBtn = ({ text }: Props) => {
   return (
     <button className="relative flex items-center px-6 py-2 overflow-hidden font-medium transition-all bg-cyan-400 rounded-md group">

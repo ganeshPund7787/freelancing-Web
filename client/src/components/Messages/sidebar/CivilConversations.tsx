@@ -1,6 +1,7 @@
 import Conversation from "./Conversation";
 import { getRandomEmoji } from "@/utils/emojis";
 import useGetCivilUserConversation from "@/Hooks/Messages_Hook/useGetCivilUserConversation";
+import Loader from "@/components/styleComponents/Loader";
 
 const CivilConversations = () => {
   const { loading, conversations } = useGetCivilUserConversation();
@@ -16,11 +17,7 @@ const CivilConversations = () => {
             lastIdx={idx === conversations?.length - 1}
           />
         ))}
-        {loading ? (
-          <div className="text-center text-2xl">
-            <span className="loading text-cyan-600 loading-spinner"></span>
-          </div>
-        ) : null}
+        {loading ? <Loader /> : null}
       </div>
     </>
   );
