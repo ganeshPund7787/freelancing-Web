@@ -30,14 +30,20 @@ export const useCivilApi = () => {
     });
 
     const data = await res.json();
+    console.log("Responce 1 : ", data);
 
     setisLoading(false);
+    console.log("Responce 2 : ", data);
     if (!data.success) {
       toast.error(data.message);
+      console.log("Responce 3 : ", data);
       return;
     }
+    console.log("Responce 4 : ", data);
     toast.success(data.message);
+    console.log("Responce 5 : ", data);
     navigate("/sign-in");
+    console.log("Responce 6 : ", data);
     return data;
   };
 

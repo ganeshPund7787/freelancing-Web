@@ -23,7 +23,7 @@ const useSendEmail = () => {
         body: JSON.stringify({ from, subject, text, to, html }),
       });
       const Data = await res.json();
-      console.log("Send Email API-Responce: ", Data);
+
       setLoading(false);
       if (Data.message != "Email sent successfully") {
         toast.error("Error while sending!");

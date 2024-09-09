@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { JobPost } from "../models/jobPost.model";
 import { errorHandler } from "../utils/error.Handler";
 import { Client } from "../models/Client.model";
+import { JobPostType, JobSearchResponce } from "../shared/Client.types";
 
 export const createJobPost = async (
   req: Request,
@@ -101,9 +102,26 @@ export const SearchJobPosts = async (
 
     console.log("Direct Query : ", req.query);
 
-    const result = await JobPost.find(query);
-    console.log("Result: ", result);
-    res.status(200).json(result);
+    const pageSize = 5;
+    const pageNumber = parseInt(
+      req.query.page ? req.query.page.toString() : "1"
+    );
+
+    const skip = (pageNumber - 1) * pageSize;
+
+    const result = await JobPost.find(query).skip(skip).limit(pageSize);
+
+    const total = await JobPost.countDocuments(query);
+
+    const responce: JobSearchResponce = {
+      data: result,
+      pagination: {
+        total,
+        page: pageNumber,
+        pages: Math.ceil(total / pageSize),
+      },
+    };
+    res.status(200).json(responce);
   } catch (error) {
     next(error);
   }

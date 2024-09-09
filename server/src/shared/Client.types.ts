@@ -35,3 +35,12 @@ export interface JobPostType {
   lastUpdated: Date;
   user?: CivilUserType | ClientType;
 }
+
+export type JobSearchResponce = {
+  data: JobPostType[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

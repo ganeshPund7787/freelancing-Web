@@ -25,7 +25,6 @@ export const useClientApi = () => {
       });
 
       const data = await res.json();
-      
 
       setisLoading(false);
       if (!data.success) {

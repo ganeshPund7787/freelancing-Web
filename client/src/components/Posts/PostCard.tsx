@@ -81,8 +81,8 @@ const PostCard = ({ post, user }: Props) => {
             </>
           )}
         </div>
-        <hr className="text-slate-500" />
       </div>
+      <hr className="text-slate-500" />
       <div className="relative mx-2 text-sm">
         <span>
           {isExpanded

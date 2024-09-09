@@ -95,6 +95,7 @@ export type JobPostType = {
   HoursePerWeak?: number | undefined;
   location?: string;
   lastUpdated?: Date;
+  page?: string;
   user?: ClientType | CivilUserType;
 };
 
@@ -110,4 +111,13 @@ export type GetUserProfile = {
   user: ClientType | CivilUserType | any;
   Posts?: PostType[];
   JobPosts: JobPostType[];
+};
+
+export type JobSearchResponce = {
+  data: JobPostType[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
 };
