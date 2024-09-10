@@ -10,6 +10,7 @@ import { useAppSelectore } from "@/App/store";
 import CommentInput from "./CommentInput";
 import { FaRegCommentDots } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useLikePost from "@/Hooks/Posts/useLikePost";
 
 type Props = {
   post: PostType;
@@ -22,7 +23,7 @@ const PostCard = ({ post, user }: Props) => {
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
   const [IsCommentVisible, setIsCommentVisible] = useState<boolean>(false);
-
+  const { like } = useLikePost();
   const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
 
   const toggleReadMore = () => {
@@ -108,7 +109,12 @@ const PostCard = ({ post, user }: Props) => {
         )}
       </div>
       <div className="flex justify-between mb-1">
-        <Button className="flex gap-3">
+        <Button
+          onClick={() => like(post._id)}
+          className={`flex gap-3 ${
+            post?.likes?.includes(defaultUser._id) ? "text-blue-700" : ""
+          }`}
+        >
           <BiLike size={25} /> like
         </Button>
         <Button

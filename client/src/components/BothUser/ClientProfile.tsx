@@ -34,7 +34,7 @@ const ClientProfile = ({ Client, userPosts, userJobPost }: Props) => {
         </div>
         <div className="rounded md:rounded-[1rem]">
           <h1 className="text-sm sm:text-2xl ml-2">Job Hiring Posts</h1>
-          <div className="p-5 flex gap-5 flex-col md:flex-row">
+          <div className="p-5 flex gap-5 flex-col ">
             {userJobPost &&
               userJobPost?.map((post: JobPostType) => (
                 <JobPostCard key={post._id} post={post} />

@@ -20,6 +20,7 @@ const useGetAllPost = () => {
         return toast.warning("Cheack Your Internet");
       }
       setPosts(data);
+      return data;
     } catch (error) {
       setLoading(false);
       console.log(`Error while getAll Post`, error);

@@ -110,3 +110,34 @@ export const GetAllPosts = async (
     next(error);
   }
 };
+
+export const LikePost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const userId: any = req._id;
+    const postId = req.params.postId;
+
+    const isPostExist = await Post.findById(postId);
+
+    if (!isPostExist) {
+      return next(errorHandler(400, "Post Not Found"));
+    }
+
+    const userIdx = isPostExist?.likes?.indexOf(userId);
+    if (userIdx === -1) {
+      isPostExist.likes.push(userId);
+    } else {
+      isPostExist.likes.splice(userId, 1);
+    }
+
+    await isPostExist.save();
+    return res.status(200).json({
+      message: "Success",
+    });
+  } catch (error: any) {
+    next(error);
+  }
+};
