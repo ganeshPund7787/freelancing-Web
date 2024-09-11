@@ -4,6 +4,7 @@ import { errorHandler } from "../utils/error.Handler";
 import { CivilUserType, PostType } from "../shared/types";
 import { Client } from "../models/Client.model";
 import { CivilUser } from "../models/civilUser.model";
+import { ClientType } from "../shared/Client.types";
 
 export const createPost = async (
   req: Request,
@@ -138,6 +139,29 @@ export const LikePost = async (
       message: "Success",
     });
   } catch (error: any) {
+    next(error);
+  }
+};
+
+export const AddComment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { postId, comment } = req.body;
+    const userId: any = req._id;
+    const isPostExist = await Post.findById(postId);
+
+    if (!isPostExist) {
+      return next(errorHandler(400, "Post Not Found"));
+    }
+
+    isPostExist.comments.push({ userId, comment });
+
+    await isPostExist.save();
+    res.status(200).json({ success: true, message: "ok" });
+  } catch (error) {
     next(error);
   }
 };

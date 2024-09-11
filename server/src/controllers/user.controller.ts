@@ -18,9 +18,9 @@ export const GetCivilUser = async (
     if (!user) {
       return next();
     }
+    console.log(user.fullName);
 
     const Posts = await Post.find({ userId });
-
     res.status(200).json({ user, Posts });
   } catch (error) {
     next(error);
@@ -40,9 +40,10 @@ export const GetCLientUser = async (
     if (!user) {
       return next(errorHandler(400, "Techical issue ! refresh the page"));
     }
+    console.log(user.fullName);
     const userJobPost = await JobPost.find({ clientId: userId });
     const userPosts = await Post.find({ userId });
-    
+
     res.status(200).json({ user, userJobPost, userPosts });
   } catch (error) {
     next(error);

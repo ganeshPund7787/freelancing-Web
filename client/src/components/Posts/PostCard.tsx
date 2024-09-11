@@ -1,4 +1,3 @@
-import { BiLike } from "react-icons/bi";
 import { CivilUserType, ClientType, PostType } from "@/types";
 import { Button } from "../ui/button";
 import { useState } from "react";
@@ -11,6 +10,8 @@ import CommentInput from "./CommentInput";
 import { FaRegCommentDots } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useLikePost from "@/Hooks/Posts/useLikePost";
+import { FaThumbsUp } from "react-icons/fa";
+import Comment from "./Comment";
 
 type Props = {
   post: PostType;
@@ -22,13 +23,16 @@ const PostCard = ({ post, user }: Props) => {
   const { deletePost } = useGetPost();
   const { Client } = useAppSelectore((state) => state.client);
   const { CurrentCivilUser } = useAppSelectore((state) => state.user);
-  const [IsCommentVisible, setIsCommentVisible] = useState<boolean>(false);
-  const { like } = useLikePost();
+  const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
+  const [commentsToShow, setCommentsToShow] = useState(1);
+  const [likes, setLikes] = useState(post.likes);
   const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
+  const { like } = useLikePost();
 
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
+
   const imageUrl =
     "profilePictureUrl" in user
       ? user.profilePictureUrl
@@ -37,21 +41,56 @@ const PostCard = ({ post, user }: Props) => {
       : null;
 
   const OnClickDeletePost = () => {
-    const userConfirmed = confirm("Are you sure you delete post ?");
+    const userConfirmed = confirm("Are you sure you want to delete this post?");
     if (!userConfirmed) {
-      toast.warning("Cancle post delete");
+      toast.warning("Cancelled post deletion");
       return;
     }
     deletePost(post._id);
   };
 
-  const toggleCommentVisisble = () => {
-    setIsCommentVisible((pre) => !pre);
+  const toggleCommentVisible = () => {
+    setIsCommentVisible((prev) => !prev);
   };
 
-  if (!user) return <div>No Post Availabel</div>;
+  const handleShowMore = () => {
+    if (post.comments) {
+      if (commentsToShow < post.comments.length) {
+        setCommentsToShow(post.comments.length);
+      } else {
+        setCommentsToShow(1);
+      }
+    }
+  };
+
+  const handleLike = async () => {
+    const alreadyLiked = likes?.includes(defaultUser._id);
+
+    setLikes((prevLikes) =>
+      alreadyLiked
+        ? prevLikes?.filter((id) => id !== defaultUser._id)
+        : prevLikes
+        ? [...prevLikes, defaultUser._id]
+        : prevLikes
+    );
+
+    try {
+      await like(post._id);
+    } catch (error) {
+      setLikes((prevLikes) =>
+        alreadyLiked
+          ? prevLikes
+            ? [...prevLikes, defaultUser._id]
+            : []
+          : prevLikes?.filter((id) => id !== defaultUser._id)
+      );
+    }
+  };
+
+  if (!user) return <div>No Post Available</div>;
+
   return (
-    <div className="flex flex-col gap-4 border bg-slate-800 shadow-2xl hover:border-cyan-700 border-slate-400 rounded-[0.5rem] sm:h-[40rem]">
+    <div className="flex flex-col gap-4 border bg-slate-800 shadow-2xl hover:border-cyan-700 border-slate-400 rounded-[0.5rem] sm:h-full">
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center font-semibold p-3">
           <Link
@@ -109,26 +148,48 @@ const PostCard = ({ post, user }: Props) => {
         )}
       </div>
       <div className="flex justify-between mb-1">
-        <Button
-          onClick={() => like(post._id)}
-          className={`flex gap-3 ${
-            post?.likes?.includes(defaultUser._id) ? "text-blue-700" : ""
-          }`}
-        >
-          <BiLike size={25} /> like
-        </Button>
+        <div className="flex flex-col">
+          <Button
+            onClick={handleLike}
+            className={` ${
+              likes?.includes(defaultUser._id) ? "text-blue-700 font-bold" : ""
+            }`}
+          >
+            <FaThumbsUp />
+          </Button>
+          {likes && likes.length !== 0 && (
+            <span className="my-1 mx-4 text-white">{likes.length} likes</span>
+          )}
+        </div>
         <Button
           type="submit"
-          onClick={toggleCommentVisisble}
+          onClick={toggleCommentVisible}
           className="flex gap-3"
         >
           <FaRegCommentDots size={25} /> Comments
         </Button>
       </div>
-      {post.likes?.length !== 0 && (
-        <span className="my-1 mx-4">{post.likes?.length} likes</span>
-      )}
-      <div className="">{IsCommentVisible && <CommentInput />}</div>
+
+      {isCommentVisible && <CommentInput postId={post?._id} />}
+
+      <div className="flex flex-col">
+        {isCommentVisible &&
+          post.comments
+            ?.slice(0, commentsToShow)
+            .map((comment: any) => (
+              <Comment
+                key={comment._id}
+                comment={comment.comment}
+                user={comment.userId}
+              />
+            ))}
+
+        {isCommentVisible && post.comments && post.comments.length > 1 && (
+          <Button onClick={handleShowMore} className="text-blue-500 mt-2">
+            {commentsToShow < post.comments.length ? "Show More" : "Show Less"}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

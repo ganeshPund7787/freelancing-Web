@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+  AddComment,
   createPost,
   deletePost,
   GetAllPosts,
@@ -18,5 +19,6 @@ route.put("/update/:postId", isAuthenticated, updatePost);
 route.delete("/delete/:postId", isAuthenticated, deletePost);
 route.get("/getAll-post", isAuthenticated, GetAllPosts);
 route.put("/like/:postId", isAuthenticated, LikePost);
+route.put("/comment", isAuthenticated, AddComment);
 
 export default route;
