@@ -41,7 +41,6 @@ export const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
   useEffect(() => {
     if (CurrentCivilUser || Client) {
       const socket = io(BACKEND_API_URL, {
-        // https://freelancing-web.onrender.com
         query: {
           userId: CurrentCivilUser?._id || Client?._id,
         },

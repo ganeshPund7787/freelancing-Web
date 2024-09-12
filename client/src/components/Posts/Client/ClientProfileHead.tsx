@@ -1,17 +1,18 @@
 import ShowProfilePicture from "@/components/BothUser/ShowProfilePicture";
+import { useSocketContext } from "@/context/SocketContext";
 import { ClientType } from "@/types";
 import { SlLocationPin } from "react-icons/sl";
 
 type Props = {
   Client: ClientType;
 };
-
 const ClientProfileHead = ({ Client }: Props) => {
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(Client._id);
   return (
     <div className="flex flex-col items-start sm:items-center sm:gap-0 gap-5 pt-5 justify-center md:flex-row">
       {" "}
-      <div className="avatar">
-        {/* online */}
+      <div className={`avatar ${isOnline ? "online" : ""}`}>
         <ShowProfilePicture img={Client.profilePictureUrl} />
       </div>
       <div className="p-5">

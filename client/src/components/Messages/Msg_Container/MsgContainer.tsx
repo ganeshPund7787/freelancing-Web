@@ -5,6 +5,7 @@ import { TiMessages } from "react-icons/ti";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
 import { FaArrowCircleRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const MsgContainer = () => {
   const { selectedConversation } = useAppSelectore((c) => c.conversation);
@@ -30,9 +31,13 @@ const MsgContainer = () => {
                 className="h-10 w-10 rounded-full"
                 alt="IMG"
               />
-              <span className="text-gray-900 font-bold">
+              <Link
+                title="View Profile"
+                to={`/user/${selectedConversation?._id}`}
+                className="text-gray-900 hover:underline hover:text-white font-bold"
+              >
                 {selectedConversation.fullName}
-              </span>
+              </Link>
             </div>
             <button
               type="button"

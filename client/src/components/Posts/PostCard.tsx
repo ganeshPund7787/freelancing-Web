@@ -27,7 +27,7 @@ const PostCard = ({ post, user }: Props) => {
   const [commentsToShow, setCommentsToShow] = useState(1);
   const [likes, setLikes] = useState(post.likes);
   const PostComments = post?.comments ? [...post?.comments].reverse() : [];
-  console.log("PostComments: ", PostComments);
+
   const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
   const { like } = useLikePost();
 
@@ -96,8 +96,9 @@ const PostCard = ({ post, user }: Props) => {
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center font-semibold p-3">
           <Link
+            title="View Profile"
             to={`/user/${user?._id}`}
-            className="flex gap-3 items-center font-semibold px-3"
+            className="flex gap-3 hover:underline hover:text-cyan-400 items-center font-semibold px-3"
           >
             {imageUrl && (
               <img
