@@ -23,8 +23,10 @@ const UserProfile = () => {
     getProfile(userId);
   }, [userId]);
 
-  if (!user) {
-    navigate("/media");
+  if (user) {
+    if (user?.user._id !== userId) {
+      navigate("/media");
+    }
   }
   return (
     <>

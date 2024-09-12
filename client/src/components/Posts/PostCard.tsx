@@ -26,6 +26,8 @@ const PostCard = ({ post, user }: Props) => {
   const [isCommentVisible, setIsCommentVisible] = useState<boolean>(false);
   const [commentsToShow, setCommentsToShow] = useState(1);
   const [likes, setLikes] = useState(post.likes);
+  const PostComments = post?.comments ? [...post?.comments].reverse() : [];
+  console.log("PostComments: ", PostComments);
   const defaultUser = Client != null ? { ...Client } : { ...CurrentCivilUser };
   const { like } = useLikePost();
 
@@ -174,15 +176,13 @@ const PostCard = ({ post, user }: Props) => {
 
       <div className="flex flex-col">
         {isCommentVisible &&
-          post.comments
-            ?.slice(0, commentsToShow)
-            .map((comment: any) => (
-              <Comment
-                key={comment._id}
-                comment={comment.comment}
-                user={comment.userId}
-              />
-            ))}
+          PostComments?.slice(0, commentsToShow).map((comment: any) => (
+            <Comment
+              key={comment._id}
+              comment={comment.comment}
+              user={comment.userId}
+            />
+          ))}
 
         {isCommentVisible && post.comments && post.comments.length > 1 && (
           <Button onClick={handleShowMore} className="text-blue-500 mt-2">

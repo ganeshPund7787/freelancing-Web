@@ -5,7 +5,6 @@ import FormInput from "../FormInput";
 import { Button } from "../ui/button";
 import { IoSend } from "react-icons/io5";
 import useCommentPost from "@/Hooks/Posts/useCommentPost";
-import Loader from "../styleComponents/Loader";
 
 const formSchema = z.object({
   comment: z.string().trim().min(1, "Required"),
@@ -33,12 +32,12 @@ const CommentInput = (postId: any) => {
         </label>
         <div className="flex gap-3 mx-1 md:mx-3 items-center mt-2">
           <FormInput placeholder="Enter your message" label="" name="comment" />
-          {!loading  && (
+          {!loading && (
             <Button type="submit">
               <IoSend size={20} />
             </Button>
           )}
-          {(loading ) && <Loader />}
+          {loading && <span>Loading</span>}
         </div>
       </form>
     </FormProvider>

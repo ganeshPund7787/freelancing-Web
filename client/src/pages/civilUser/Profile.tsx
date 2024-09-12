@@ -8,7 +8,6 @@ import AddWorkExperiance, {
 
 import { PostType } from "@/types";
 import ExperianceCard from "@/components/civilUser/ExperianceCard";
-import AddCertifications from "@/components/civilUser/AddCertifications";
 import ProjectSection from "@/components/civilUser/ProjectSection";
 import LogOut from "@/components/LogOut";
 import { useEffect, useState } from "react";
@@ -129,11 +128,6 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Certifications Section */}
-              <div className="flex mt-5 flex-col min-h-full md:p-5">
-                <AddCertifications user={CurrentCivilUser} />
               </div>
 
               {/* Project Section */}

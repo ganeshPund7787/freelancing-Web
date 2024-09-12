@@ -1,5 +1,6 @@
 import userGetProfile from "@/Hooks/BothUserHooks/userGetProfile";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export type Props = {
   comment: string;
@@ -15,7 +16,7 @@ const Comment = ({ comment, user: userId }: Props) => {
   return (
     <>
       {!loading && (
-        <div className="flex flex-col p-4 border-b dark:border-x-gray-600 text-sm">
+        <div className="flex flex-col p-4 border-b border-slate-500 text-sm">
           <div className="flex items-center">
             <div className="flex-shrink-0 mr-3">
               <img
@@ -29,13 +30,16 @@ const Comment = ({ comment, user: userId }: Props) => {
             </div>
             <div className="flex-1">
               <div className="flex items-center mb-1">
-                <span className="font-bold text-xs">
+                <Link
+                  to={`/user/${CurrentUser?.user?._id}`}
+                  className="font-bold text-xs"
+                >
                   {CurrentUser?.user?.fullName}
-                </span>
+                </Link>
               </div>
             </div>
           </div>
-          <div className="sm:mx-14 mx-8 font-semibold">{comment}</div>
+          <div className="sm:mx-14 mx-12 font-semibold">{comment}</div>
         </div>
       )}
     </>
