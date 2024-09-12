@@ -14,7 +14,7 @@ const CivilProfilHead = ({ CurrentCivilUser }: Props) => {
   const isOnline = onlineUsers.includes(CurrentCivilUser._id);
   return (
     <div className="flex items-center flex-col pt-5 sm:gap-0 gap-5 justify-center md:flex-row">
-      <div className={`avatar ${isOnline ? "online" : ""}`}>
+      <div className={`ml-6 md:ml-0  avatar ${isOnline ? "online" : ""}`}>
         <ShowProfilePicture img={CurrentCivilUser?.photoUrl} />
       </div>
       <div className="p-5">

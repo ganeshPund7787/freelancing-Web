@@ -4,12 +4,12 @@ const JobPostCard = ({ post }: any) => {
   const skillsToShow = post.skills.slice(0, 4); // Show only the first 5 skills
 
   return (
-    <div className="sm:p-5 p-2 flex flex-col border bg-slate-800 rounded md:rounded-[1rem] hover:bg-slate-900 hover:border-cyan-400 border-slate-600 shadow-lg">
+    <div className="sm:p-5 p-2 flex flex-col border bg-slate-800 rounded-[1rem] hover:bg-slate-900 hover:border-cyan-400 border-slate-600 shadow-lg">
       <div className="flex flex-col gap-4">
         <span className="text-slate-500">
           Post on {createdAt.toLocaleDateString()}
         </span>
-        <div className="s">
+        <div className="">
           <JobPostDetails post={post} />
         </div>
       </div>

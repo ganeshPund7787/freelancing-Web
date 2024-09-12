@@ -16,7 +16,7 @@ const ShowProfilePicture = ({ img }: Props) => {
       <DialogTrigger asChild>
         <Button className="">
           <div className="h-24 w-24 rounded-full">
-            <img src={img} className="ml-6 md:ml-0 h-24 rounded-full" />
+            <img src={img} className="h-24 rounded-full" />
           </div>
         </Button>
       </DialogTrigger>

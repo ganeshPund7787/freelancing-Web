@@ -82,7 +82,7 @@ const CivilUserProfile = ({ Posts, user: CurrentCivilUser }: Props) => {
               </center>
             )}
           </div>
-          <div className="flex mx-20 flex-col gap-5">
+          <div className="flex sm:mx-20 mx-2 flex-col gap-5">
             <h1 className="font-bold">Posts/ Activity</h1>
             <ProfilePosts posts={Posts} user={CurrentCivilUser} />
           </div>

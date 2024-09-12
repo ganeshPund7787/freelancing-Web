@@ -38,7 +38,7 @@ const JobPostDetails = ({ post }: any) => {
       <Sheet>
         <SheetTrigger asChild>
           <Button
-            className="flex justify-start text-sm  text-cyan-400 sm:text-[1.3rem] hover:underline cursor-pointer"
+            className="flex justify-start text-sm text-wrap text-cyan-400 sm:text-[1.3rem] hover:underline cursor-pointer"
             variant="ghost"
           >
             {post?.heading}
