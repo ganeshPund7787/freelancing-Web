@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import useLikePost from "@/Hooks/Posts/useLikePost";
 import { FaThumbsUp } from "react-icons/fa";
 import Comment from "./Comment";
+import { useSocketContext } from "@/context/SocketContext";
 
 type Props = {
   post: PostType;
@@ -88,6 +89,8 @@ const PostCard = ({ post, user }: Props) => {
       );
     }
   };
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(user?._id);
 
   if (!user) return <div>No Post Available</div>;
 
@@ -96,16 +99,21 @@ const PostCard = ({ post, user }: Props) => {
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center font-semibold p-3">
           <Link
+            onClick={() =>
+              isOnline ? toast.info(`${user?.fullName} is online`) : null
+            }
             title="View Profile"
             to={`/user/${user?._id}`}
             className="flex gap-3 hover:underline hover:text-cyan-400 items-center font-semibold px-3"
           >
             {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="User Picture"
-                className="h-10 w-10 object-cover rounded-full"
-              />
+              <div className={`size-12 avatar ${isOnline ? "online" : ""}`}>
+                <img
+                  src={imageUrl}
+                  alt="User Picture"
+                  className="size-full object-cover rounded-full"
+                />
+              </div>
             )}
             <h1 className="hover:underline">{user.fullName}</h1>
           </Link>

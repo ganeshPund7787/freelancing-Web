@@ -1,6 +1,8 @@
+import { useSocketContext } from "@/context/SocketContext";
 import userGetProfile from "@/Hooks/BothUserHooks/userGetProfile";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export type Props = {
   comment: string;
@@ -8,7 +10,9 @@ export type Props = {
 };
 const Comment = ({ comment, user: userId }: Props) => {
   const { getProfile, user: CurrentUser, loading } = userGetProfile();
-
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(CurrentUser?.user?._id);
+  
   useEffect(() => {
     getProfile(userId);
   }, [comment, userId]);
@@ -31,6 +35,11 @@ const Comment = ({ comment, user: userId }: Props) => {
             <div className="flex-1">
               <div className="flex items-center mb-1">
                 <Link
+                  onClick={() =>
+                    isOnline
+                      ? toast.info(CurrentUser?.user?.fullName + " is Online")
+                      : null
+                  }
                   to={`/user/${CurrentUser?.user?._id}`}
                   className="font-bold text-xs"
                 >

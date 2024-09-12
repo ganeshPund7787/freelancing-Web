@@ -10,6 +10,7 @@ const CivilProfilHead = ({ CurrentCivilUser }: Props) => {
   if (!CurrentCivilUser) {
     return <>Not Found</>;
   }
+  
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(CurrentCivilUser._id);
   return (
