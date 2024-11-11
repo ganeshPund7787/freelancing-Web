@@ -114,6 +114,9 @@ const JobPostDetails = ({ post }: any) => {
               <>
                 <div className="flex sm:flex-row flex-col sm:gap-0 gap-5 items-center justify-center sm:mt-0 mt-5">
                   <SheetClose asChild>
+                    <ContactToClient user={post?.user} />
+                  </SheetClose>
+                  <SheetClose asChild>
                     <Link to={`/user/${post.clientId}`}>
                       <Button type="submit">
                         <ContactBtn text={"View Profile"} />

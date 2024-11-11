@@ -55,5 +55,5 @@ app.get("*", (req: Request, res: Response) => {
 
 app.use(errorMiddleware);
 server.listen(process.env.PORT, () => {
-  console.log(`Server is working on ${process.env.PORT}`);
+  console.log(`Express is working on ${process.env.PORT}`);
 });

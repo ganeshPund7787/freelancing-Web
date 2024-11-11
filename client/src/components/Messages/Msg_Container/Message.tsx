@@ -37,13 +37,14 @@ const Message = ({ message }: Props) => {
 
       {message?.message && (
         <div
-          className={`chat-bubble sm:w-[15rem] text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+          className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
         >
-          <span>
+          <span className={`max-w-lg whitespace-normal break-words`}>
             {isExpanded
               ? message?.message
               : `${(message?.message as string).substring(0, 100)}`}
           </span>
+
           {(message?.message as string).length > 60 && (
             <button
               onClick={toggleReadMore}
