@@ -14,6 +14,7 @@ import { useAppSelectore } from "./App/store";
 import ProtectRoute from "./components/ProtectRoutes/ProtectRoute";
 import { CivilProtectRoute } from "./components/ProtectRoutes/CivilProtectRoute";
 import ClientProtectRoute from "./components/ProtectRoutes/ClientProtectRoute";
+import Loader from "./components/styleComponents/Loader";
 
 // Lazy loaded components
 const SelectRoleFoeSignUp = lazy(
@@ -40,7 +41,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <Suspense fallback={<span>Loading...</span>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route
             element={
